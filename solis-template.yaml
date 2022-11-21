@@ -1,0 +1,38 @@
+sensor:
+  - name: "Solis Grid Active Power (Negative)"
+    unique_id: "Solis Grid Active Power (Negative)"
+    unit_of_measurement: W
+    device_class: power
+    state_class: measurement
+    state: >-
+      {{ -1 * states('sensor.solis_grid_active_power') | float }}
+
+  - name: "Solis Grid Export Power"
+    unique_id: "Solis Grid Export Power"
+    unit_of_measurement: W
+    device_class: power
+    state_class: measurement
+    state: >-
+      {% set state =  states.sensor.solis_grid_active_power.state | float %}
+      {{ state if state > 0 else 0 }}
+
+  - name: "Solis Grid Import Power"
+    unique_id: "Solis Grid Import Power"
+    unit_of_measurement: W
+    device_class: power
+    state_class: measurement
+    state: >-
+      {% set state =  states.sensor.solis_grid_active_power.state | float %}
+      {{ -1 * state if state < 0 else 0 }}
+
+  - name: "Solis Grid Mode"
+    unique_id: "Solis Grid Mode"
+    state: >-
+      {% set state =  states.sensor.solis_grid_active_power.state | float %}
+      {{ 'Import' if state < 0 else 'Export' }}
+
+  - name: "Solis Battery Mode"
+    unique_id: "Solis Battery Mode"
+    state: >-
+      {% set state =  states.sensor.solis_battery_current_direction.state | float %}
+      {{ 'Discharge' if state > 0 else 'Charge' }}
