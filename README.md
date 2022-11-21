@@ -3,7 +3,7 @@
 
 This is a Home Assistant YAML file for communicating with a Solis Hybrid inverter using a DLS-L LAN Data Logging Stick which uses pure Modbus over TCP. It has been tested using a stick with Serial number 1920xxxxxx and a Solis 5-eh1p(3-6)k inverter.
 
-The YAML file which can be included in the <i>configuration.yaml</i> file in the Home Assitant <i>config</i> folder. All that should need changing is the <i>solis_ip</i> secret which is inlcluded from <i>secrets.yaml</i>. 
+The YAML file which can be included in the <i>configuration.yaml</i> file in the Home Assitant <i>config</i> folder. All that should need changing is the <i>solis_ip</i> secret which is included from <i>secrets.yaml</i>. Alternatively just overwrite with the IP address.
 
 Scan intervals are set as follows:
 
@@ -12,7 +12,7 @@ Scan intervals are set as follows:
  - Monthly, Yearly and Lifetime totals: 1 hour
 
 
-There is also a single template sensor which negates the grid power so that export is negative and import is positive - mainly for presentation purposes.
+There is also a single template sensor which negates the grid power so that export is negative and import is positive - mainly for presentation purposes. <i>configuation.yaml</i> will therefore contain:
 
     modbus: !include solis.yaml
     
