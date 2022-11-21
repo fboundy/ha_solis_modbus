@@ -27,3 +27,10 @@ There is also a single template sensor which negates the grid power so that expo
           {{ -1 * states('sensor.solis_grid_active_power') | float }}
 
 Other registers can be imported using the same format. A full list can be found [here](https://www.scss.tcd.ie/Brian.Coghlan/Elios4you/RS485_MODBUS-Hybrid-BACoghlan-201811228-1854.pdf) courtesy of Dr. Brian Coghlan.
+
+<h3>Utilities</h3>
+Also included is a small Python script which will check modbus communications and, if all is well, will report back Inverter Temperature, Grid Voltage and Batter SOC:
+
+    Inverter Temperature:     30.3 C
+    Grid Voltage:            243.3 V
+    Battery SOC:              15.0 %  
