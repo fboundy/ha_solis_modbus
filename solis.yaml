@@ -77,7 +77,7 @@
       input_type: input
       data_type: uint16
       lazy_error_count: 5
-      scan_interval: 60
+      scan_interval: 300
       scale: 0.1
       precision: 1
       device_class: energy
@@ -90,7 +90,7 @@
       input_type: input
       data_type: uint16
       lazy_error_count: 5
-      scan_interval: 60
+      scan_interval: 300
       scale: 0.1
       precision: 1
       device_class: energy
@@ -103,7 +103,7 @@
       input_type: input
       data_type: uint32
       lazy_error_count: 5
-      scan_interval: 60
+      scan_interval: 3600
       scale: 1
       precision: 1
       device_class: energy
@@ -116,7 +116,7 @@
       input_type: input
       data_type: uint32
       lazy_error_count: 5
-      scan_interval: 60
+      scan_interval: 3600
       scale: 1
       precision: 1
       device_class: energy
@@ -159,7 +159,7 @@
       input_type: input
       data_type: uint16
       lazy_error_count: 5
-      scan_interval: 60
+      scan_interval: 300
       scale: 0.1
       precision: 1
       device_class: energy
@@ -172,7 +172,7 @@
       input_type: input
       data_type: uint32
       lazy_error_count: 5
-      scan_interval: 60
+      scan_interval: 3600
       scale: 1
       precision: 1
       device_class: energy
@@ -280,7 +280,7 @@
       input_type: input
       data_type: uint16
       lazy_error_count: 5
-      scan_interval: 60
+      scan_interval: 300
       scale: 0.1
       precision: 1
       device_class: energy
@@ -293,7 +293,7 @@
       input_type: input
       data_type: uint16
       lazy_error_count: 5
-      scan_interval: 60
+      scan_interval: 300
       scale: 0.1
       precision: 1
       device_class: energy
@@ -306,7 +306,7 @@
       input_type: input
       data_type: uint32
       lazy_error_count: 5
-      scan_interval: 60
+      scan_interval: 3600
       scale: 1
       precision: 1
       device_class: energy
@@ -319,7 +319,7 @@
       input_type: input
       data_type: uint32
       lazy_error_count: 5
-      scan_interval: 60
+      scan_interval: 3600
       scale: 1
       precision: 1
       device_class: energy
@@ -468,7 +468,7 @@
       input_type: input
       data_type: uint16
       lazy_error_count: 5
-      scan_interval: 60
+      scan_interval: 300
       scale: .1
       precision: 1
       device_class: energy
@@ -481,7 +481,7 @@
       input_type: input
       data_type: uint32
       lazy_error_count: 5
-      scan_interval: 60
+      scan_interval: 3600
       scale: 1
       precision: 1
       device_class: energy
@@ -494,7 +494,7 @@
       input_type: input
       data_type: uint32
       lazy_error_count: 5
-      scan_interval: 60
+      scan_interval: 3600
       scale: 1
       precision: 1
       device_class: energy
@@ -507,7 +507,7 @@
       input_type: input
       data_type: uint32
       lazy_error_count: 5
-      scan_interval: 60
+      scan_interval: 3600
       scale: 1
       precision: 1
       device_class: energy
