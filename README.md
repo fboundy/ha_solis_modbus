@@ -1,5 +1,5 @@
 # ha_solis_modbus
-<H1>Home Assistant YAML for Solis Hybrid Inverter using MODBUS</H1>
+<H3>Home Assistant YAML for Solis Hybrid Inverter using MODBUS</H3>
 
 This is a Home Assistant YAML file for communicating with a Solis Hybrid inverter using a DLS-L LAN Data Logging Stick which uses pure Modbus over TCP. It has been tested using a stick with Serial number 1920xxxxxx and a Solis 5-eh1p(3-6)k inverter.
 
