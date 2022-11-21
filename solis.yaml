@@ -1,0 +1,561 @@
+modbus:
+  - name: "solis"
+    type: tcp
+    host: !secret solis_ip
+    port: 8899
+    sensors:
+      - name: Solis Temperature
+        slave: 1
+        address: 33093
+        count: 1
+        input_type: input
+        data_type: uint16
+        lazy_error_count: 5
+        scan_interval: 60
+        device_class: Temperature
+        state_class: measurement
+        unit_of_measurement: C
+
+      # Grid
+      - name: Solis Grid Frequency
+        slave: 1
+        address: 33282
+        count: 1
+        input_type: input
+        data_type: uint16
+        lazy_error_count: 5
+        scan_interval: 60
+        scale: 0.01
+        precision: 1
+        device_class: frequency
+        state_class: measurement
+        unit_of_measurement: Hz
+      - name: Solis Grid Voltage
+        slave: 1
+        address: 33251
+        count: 1
+        input_type: input
+        data_type: uint16
+        lazy_error_count: 5
+        scan_interval: 60
+        scale: 0.1
+        precision: 1
+        device_class: voltage
+        state_class: measurement
+        unit_of_measurement: V
+      - name: Solis Grid Current
+        slave: 1
+        address: 33252
+        count: 1
+        input_type: input
+        data_type: uint16
+        lazy_error_count: 5
+        scan_interval: 60
+        scale: 0.01
+        precision: 1
+        device_class: current
+        state_class: measurement
+        unit_of_measurement: A
+      - name: Solis Grid Active Power
+        slave: 1
+        address: 33257
+        count: 2
+        input_type: input
+        data_type: int32
+        lazy_error_count: 5
+        scan_interval: 60
+        scale: 1
+        precision: 1
+        device_class: power
+        state_class: measurement
+        unit_of_measurement: W
+
+        # Energy Imported/Exported
+      - name: Solis Daily Energy Imported
+        slave: 1
+        address: 33171
+        count: 1
+        input_type: input
+        data_type: uint16
+        lazy_error_count: 5
+        scan_interval: 60
+        scale: 0.1
+        precision: 1
+        device_class: energy
+        state_class: total
+        unit_of_measurement: kWh
+      - name: Solis Daily Energy Exported
+        slave: 1
+        address: 33175
+        count: 1
+        input_type: input
+        data_type: uint16
+        lazy_error_count: 5
+        scan_interval: 60
+        scale: 0.1
+        precision: 1
+        device_class: energy
+        state_class: total
+        unit_of_measurement: kWh
+      - name: Solis Total Energy Imported
+        slave: 1
+        address: 33169
+        count: 2
+        input_type: input
+        data_type: uint32
+        lazy_error_count: 5
+        scan_interval: 60
+        scale: 1
+        precision: 1
+        device_class: energy
+        state_class: total
+        unit_of_measurement: kWh
+      - name: Solis Total Energy Exported
+        slave: 1
+        address: 33173
+        count: 2
+        input_type: input
+        data_type: uint32
+        lazy_error_count: 5
+        scan_interval: 60
+        scale: 1
+        precision: 1
+        device_class: energy
+        state_class: total
+        unit_of_measurement: kWh
+
+      # Load
+      - name: Solis House Load Power
+        slave: 1
+        address: 33147
+        count: 1
+        input_type: input
+        data_type: uint16
+        lazy_error_count: 5
+        scan_interval: 60
+        scale: 1
+        precision: 1
+        device_class: power
+        state_class: measurement
+        unit_of_measurement: W
+      - name: Solis Backup Load Power
+        slave: 1
+        address: 33148
+        count: 1
+        input_type: input
+        data_type: uint16
+        lazy_error_count: 5
+        scan_interval: 60
+        scale: 1
+        precision: 1
+        device_class: power
+        state_class: measurement
+        unit_of_measurement: W
+
+      # Consumption
+      - name: Solis Daily Consumption
+        slave: 1
+        address: 33179
+        count: 1
+        input_type: input
+        data_type: uint16
+        lazy_error_count: 5
+        scan_interval: 60
+        scale: 0.1
+        precision: 1
+        device_class: energy
+        state_class: total
+        unit_of_measurement: kWh
+      - name: Solis Total Consumption
+        slave: 1
+        address: 33177
+        count: 2
+        input_type: input
+        data_type: uint32
+        lazy_error_count: 5
+        scan_interval: 60
+        scale: 1
+        precision: 1
+        device_class: energy
+        state_class: total
+        unit_of_measurement: kWh
+
+      # Battery
+      - name: Solis Battery Power
+        slave: 1
+        address: 33149
+        count: 2
+        input_type: input
+        data_type: int32
+        lazy_error_count: 5
+        scan_interval: 60
+        scale: 1
+        precision: 1
+        device_class: power
+        state_class: measurement
+        unit_of_measurement: W
+      - name: Solis Battery SOC
+        slave: 1
+        address: 33139
+        count: 1
+        input_type: input
+        data_type: uint16
+        lazy_error_count: 5
+        scan_interval: 60
+        scale: 1
+        precision: 1
+        device_class: battery
+        state_class: measurement
+        unit_of_measurement: "%"
+      - name: Solis Battery SOH
+        slave: 1
+        address: 33140
+        count: 1
+        input_type: input
+        data_type: uint16
+        lazy_error_count: 5
+        scan_interval: 60
+        scale: 1
+        precision: 1
+        device_class: battery
+        state_class: measurement
+        unit_of_measurement: "%"
+      - name: Solis Battery Voltage
+        slave: 1
+        address: 33133
+        count: 1
+        input_type: input
+        data_type: uint16
+        lazy_error_count: 5
+        scan_interval: 60
+        scale: 0.1
+        precision: 1
+        device_class: voltage
+        state_class: measurement
+        unit_of_measurement: V
+      - name: Solis Battery Voltage (BMS)
+        slave: 1
+        address: 33141
+        count: 1
+        input_type: input
+        data_type: uint16
+        lazy_error_count: 5
+        scan_interval: 60
+        scale: 0.01
+        precision: 1
+        device_class: voltage
+        state_class: measurement
+        unit_of_measurement: V
+      - name: Solis Battery Current
+        slave: 1
+        address: 33134
+        count: 1
+        input_type: input
+        data_type: int16
+        lazy_error_count: 5
+        scan_interval: 60
+        scale: 0.1
+        precision: 1
+        device_class: current
+        state_class: measurement
+        unit_of_measurement: A
+      - name: Solis Battery Current (BMS)
+        slave: 1
+        address: 33142
+        count: 1
+        input_type: input
+        data_type: int16
+        lazy_error_count: 5
+        scan_interval: 60
+        scale: 0.01
+        precision: 1
+        device_class: current
+        state_class: measurement
+        unit_of_measurement: A
+
+      # Battery Totals
+      - name: Solis Daily Battery Charge
+        slave: 1
+        address: 33163
+        count: 1
+        input_type: input
+        data_type: uint16
+        lazy_error_count: 5
+        scan_interval: 60
+        scale: 0.1
+        precision: 1
+        device_class: energy
+        state_class: total
+        unit_of_measurement: kWh
+      - name: Solis Daily Battery Discharge
+        slave: 1
+        address: 33167
+        count: 1
+        input_type: input
+        data_type: uint16
+        lazy_error_count: 5
+        scan_interval: 60
+        scale: 0.1
+        precision: 1
+        device_class: energy
+        state_class: total
+        unit_of_measurement: kWh
+      - name: Solis Total Battery Charge
+        slave: 1
+        address: 33161
+        count: 2
+        input_type: input
+        data_type: uint32
+        lazy_error_count: 5
+        scan_interval: 60
+        scale: 1
+        precision: 1
+        device_class: energy
+        state_class: total
+        unit_of_measurement: kWh
+      - name: Solis Total Battery Discharge
+        slave: 1
+        address: 33165
+        count: 2
+        input_type: input
+        data_type: uint32
+        lazy_error_count: 5
+        scan_interval: 60
+        scale: 1
+        precision: 1
+        device_class: energy
+        state_class: total
+        unit_of_measurement: kWh
+
+      # Inverter DC Input
+      - name: Solis PV1 Voltage
+        slave: 1
+        address: 33049
+        count: 1
+        input_type: input
+        data_type: uint16
+        lazy_error_count: 5
+        scan_interval: 60
+        scale: 0.1
+        precision: 1
+        device_class: voltage
+        state_class: measurement
+        unit_of_measurement: V
+      - name: Solis PV2 Voltage
+        slave: 1
+        address: 33051
+        count: 1
+        input_type: input
+        data_type: uint16
+        lazy_error_count: 5
+        scan_interval: 60
+        scale: 0.1
+        precision: 1
+        device_class: voltage
+        state_class: measurement
+        unit_of_measurement: V
+      - name: Solis PV1 Current
+        slave: 1
+        address: 33050
+        count: 1
+        input_type: input
+        data_type: uint16
+        lazy_error_count: 5
+        scan_interval: 60
+        scale: 0.1
+        precision: 1
+        device_class: current
+        state_class: measurement
+        unit_of_measurement: A
+      - name: Solis PV2 Current
+        slave: 1
+        address: 33052
+        count: 1
+        input_type: input
+        data_type: uint16
+        lazy_error_count: 5
+        scan_interval: 60
+        scale: 0.1
+        precision: 1
+        device_class: current
+        state_class: measurement
+        unit_of_measurement: A
+      - name: Solis Inverter DC Power
+        slave: 1
+        address: 33057
+        count: 2
+        input_type: input
+        data_type: uint32
+        lazy_error_count: 5
+        scan_interval: 60
+        scale: 1
+        precision: 1
+        device_class: power
+        state_class: measurement
+        unit_of_measurement: W
+
+      # Inverter AC Output
+      - name: Solis Inverter AC Power
+        slave: 1
+        address: 33079
+        count: 2
+        input_type: input
+        data_type: int32
+        lazy_error_count: 5
+        scan_interval: 60
+        scale: 1
+        precision: 1
+        device_class: power
+        state_class: measurement
+        unit_of_measurement: W
+      - name: Solis Inverter Voltage
+        slave: 1
+        address: 33073
+        count: 1
+        input_type: input
+        data_type: uint16
+        lazy_error_count: 5
+        scan_interval: 60
+        scale: 0.1
+        precision: 1
+        device_class: voltage
+        state_class: measurement
+        unit_of_measurement: V
+      - name: Solis Inverter Current
+        slave: 1
+        address: 33076
+        count: 1
+        input_type: input
+        data_type: uint16
+        lazy_error_count: 5
+        scan_interval: 60
+        scale: 0.1
+        precision: 1
+        device_class: current
+        state_class: measurement
+        unit_of_measurement: A
+      - name: Solis Inverter Apparent Power
+        slave: 1
+        address: 33083
+        count: 2
+        input_type: input
+        data_type: int32
+        lazy_error_count: 5
+        scan_interval: 60
+        scale: 1
+        precision: 1
+        device_class: apparent_power
+        state_class: measurement
+        unit_of_measurement: VA
+      - name: Solis Inverter Frequency
+        slave: 1
+        address: 33094
+        count: 1
+        input_type: input
+        data_type: uint16
+        lazy_error_count: 5
+        scan_interval: 60
+        scale: .01
+        precision: 1
+        device_class: frequency
+        state_class: measurement
+        unit_of_measurement: Hz
+
+      # Generation
+      - name: Solis Daily Generation
+        slave: 1
+        address: 33035
+        count: 1
+        input_type: input
+        data_type: uint16
+        lazy_error_count: 5
+        scan_interval: 60
+        scale: .1
+        precision: 1
+        device_class: energy
+        state_class: total
+        unit_of_measurement: kWh
+      - name: Solis Monthly Generation
+        slave: 1
+        address: 33031
+        count: 2
+        input_type: input
+        data_type: uint32
+        lazy_error_count: 5
+        scan_interval: 60
+        scale: 1
+        precision: 1
+        device_class: energy
+        state_class: total
+        unit_of_measurement: kWh
+      - name: Solis Yearly Generation
+        slave: 1
+        address: 33037
+        count: 2
+        input_type: input
+        data_type: uint32
+        lazy_error_count: 5
+        scan_interval: 60
+        scale: 1
+        precision: 1
+        device_class: energy
+        state_class: total
+        unit_of_measurement: kWh
+      - name: Solis Total Generation
+        slave: 1
+        address: 33029
+        count: 2
+        input_type: input
+        data_type: uint32
+        lazy_error_count: 5
+        scan_interval: 60
+        scale: 1
+        precision: 1
+        device_class: energy
+        state_class: total
+        unit_of_measurement: kWh
+
+      # Flags and Status
+      - name: Solis Energy Storage Control Switch
+        slave: 1
+        address: 33132
+        count: 1
+        input_type: input
+        data_type: uint16
+        lazy_error_count: 5
+        scan_interval: 60
+        scale: 1
+        precision: 1
+        state_class: measurement
+      - name: Solis Battery Current Direction
+        slave: 1
+        address: 33135
+        count: 1
+        input_type: input
+        data_type: uint16
+        lazy_error_count: 5
+        scan_interval: 60
+        scale: 1
+        precision: 1
+        state_class: measurement
+      - name: Solis Inverter Status
+        slave: 1
+        address: 33095
+        count: 1
+        input_type: input
+        data_type: uint16
+        lazy_error_count: 5
+        scan_interval: 60
+        scale: 1
+        precision: 1
+        state_class: measurement
+
+template:
+  sensor:
+    name: "Solis Grid Active Power (Negative)"
+    unique_id: "Solis Grid Active Power (Negative)"
+    unit_of_measurement: W
+    device_class: power
+    state_class: measurement
+    state: >-
+      {{ -1 * states('sensor.solis_grid_active_power') | float }}
