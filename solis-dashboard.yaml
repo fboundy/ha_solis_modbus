@@ -1,0 +1,107 @@
+  - theme: Backend-selected
+    title: Solis
+    path: solis
+    icon: mdi:flash
+    cards:
+      - type: custom:layout-card
+        layout_type: custom:vertical-layout
+        layout:
+          width: 1000
+          max_cols: 1
+        cards:
+          - type: custom:stack-in-card
+            title: null
+            mode: horizontal
+            cards:
+              - type: gauge
+                entity: sensor.solis_inverter_dc_power
+                name: Solar Power
+                max: 4000
+                min: 0
+                needle: false
+              - type: gauge
+                entity: sensor.solis_house_load_power
+                name: Load
+                max: 4000
+                min: 0
+                needle: false
+              - type: gauge
+                entity: sensor.solis_battery_soc
+                name: Battery SOC
+                needle: false
+                severity:
+                  green: 50
+                  yellow: 20
+                  red: 12
+              - type: gauge
+                entity: sensor.solis_inverter_ac_power
+                name: Inverter Power
+                max: 4000
+                min: -4000
+                needle: true
+                severity:
+                  green: -4000
+                  yellow: -10
+                  red: 10
+              - type: gauge
+                entity: sensor.solis_battery_power
+                name: Battery Power
+                max: 4000
+                min: -4000
+                needle: true
+                severity:
+                  green: -4000
+                  yellow: -10
+                  red: 10
+              - type: gauge
+                entity: sensor.solis_grid_active_power_negative
+                name: Grid Power
+                max: 4000
+                min: -4000
+                needle: true
+                severity:
+                  green: -4000
+                  yellow: -10
+                  red: 10
+          - type: custom:layout-card
+            layout_type: custom:masonry-layout
+            layout:
+              column_widths: 1fr 2fr;
+              width: 400
+            cards:
+              - type: custom:stack-in-card
+                title: null
+                mode: vertical
+                cards:
+                  - type: energy-distribution
+                  - type: energy-grid-neutrality-gauge
+                  - type: energy-solar-consumed-gauge
+              - type: custom:history-explorer-card
+                header: Power Chart
+                cardName: historycard-93716784
+                combineSameUnits: true
+                graphs:
+                  - type: line
+                    title: Load / Grid / Solar
+                    options:
+                      interval: daily
+                      ymax: 4000
+                    entities:
+                      - entity: sensor.solis_grid_active_power_negative
+                        name: Grid
+                      - entity: sensor.solis_house_load_power
+                        name: Load
+                      - entity: sensor.solis_inverter_dc_power
+                        name: Solar Power
+                      - entity: sensor.power_production_now
+                        color: white
+                        fill: rgba(0,0,0,0)
+                        name: Forecast Solar
+                  - type: line
+                    title: Battery
+                    options:
+                      interval: daily
+                      ymin: 0
+                      ymax: 100
+                    entities:
+                      - entity: sensor.solis_battery_soc
