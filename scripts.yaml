@@ -1,0 +1,179 @@
+set_solis_storage_toggles:
+  alias: Set Solis Storage Toggles
+  sequence:
+    - if:
+        - condition: template
+          value_template:
+            "{{states('sensor.solis_energy_storage_control_switch') |
+            int | bitwise_and(32) == 32}}"
+      then:
+        - service: input_boolean.turn_on
+          data: {}
+          target:
+            entity_id:
+              - input_boolean.solis_storage_mode_grid_charge
+      else:
+        - service: input_boolean.turn_off
+          data: {}
+          target:
+            entity_id: input_boolean.solis_storage_mode_grid_charge
+    - if:
+        - condition: template
+          value_template:
+            "{{states('sensor.solis_energy_storage_control_switch') |
+            int | bitwise_and(16) == 16}}"
+      then:
+        - service: input_boolean.turn_on
+          data: {}
+          target:
+            entity_id: input_boolean.solis_storage_mode_backup
+      else:
+        - service: input_boolean.turn_off
+          data: {}
+          target:
+            entity_id: input_boolean.solis_storage_mode_backup
+    - if:
+        - condition: template
+          value_template:
+            "{{states('sensor.solis_energy_storage_control_switch') |
+            int | bitwise_and(8) == 8}}"
+      then:
+        - service: input_boolean.turn_on
+          data: {}
+          target:
+            entity_id: input_boolean.solis_storage_mode_wake_up
+      else:
+        - service: input_boolean.turn_off
+          data: {}
+          target:
+            entity_id:
+              - input_boolean.solis_storage_mode_wake_up
+    - if:
+        - condition: template
+          value_template:
+            "{{states('sensor.solis_energy_storage_control_switch') |
+            int | bitwise_and(4) == 4}}"
+      then:
+        - service: input_boolean.turn_on
+          data: {}
+          target:
+            entity_id: input_boolean.solis_storage_mode_off_grid
+      else:
+        - service: input_boolean.turn_off
+          data: {}
+          target:
+            entity_id: input_boolean.solis_storage_mode_off_grid
+    - if:
+        - condition: template
+          value_template:
+            "{{states('sensor.solis_energy_storage_control_switch') |
+            int | bitwise_and(2) == 2}}"
+      then:
+        - service: input_boolean.turn_on
+          data: {}
+          target:
+            entity_id:
+              - input_boolean.solis_storage_mode_timed
+      else:
+        - service: input_boolean.turn_off
+          data: {}
+          target:
+            entity_id: input_boolean.solis_storage_mode_timed
+    - if:
+        - condition: template
+          value_template:
+            "{{states('sensor.solis_energy_storage_control_switch') |
+            int | bitwise_and(1) == 1}}"
+      then:
+        - service: input_boolean.turn_on
+          data: {}
+          target:
+            entity_id: input_boolean.solis_storage_mode_spontaneous
+      else:
+        - service: input_boolean.turn_off
+          data: {}
+          target:
+            entity_id:
+              - input_boolean.solis_storage_mode_spontaneous
+  mode: single
+  icon: mdi:toggle-switch-off-outline
+solis_set_energy_storage_mode:
+  alias: Solis Set Energy Storage Mode
+  fields:
+    storage_mode:
+      description: Storage Mode to Set (uint16)
+      example: 35
+  sequence:
+    - service: script.solis_write_holding_register
+      data:
+        register_addr: 43110
+        register_value:
+          "{{(states('input_boolean.solis_storage_mode_spontaneous')
+          == 'on') | int  + 2 * (states('input_boolean.solis_storage_mode_timed')
+          == 'on') | int  + 4 * (states('input_boolean.solis_storage_mode_off_grid')
+          == 'on') | int  + 8 * (states('input_boolean.solis_storage_mode_wake_up')
+          == 'on') | int  + 16 * (states('input_boolean.solis_storage_mode_backup')
+          == 'on') | int  + 32 * (states('input_boolean.solis_storage_mode_grid_charge')
+          == 'on') | int  }}"
+  mode: single
+solis_set_charge_current:
+  alias: Solis Set Charge Current
+  fields:
+    solis_set_charge_current:
+      description: Fixed time charge current (A)
+      example: 50
+  sequence:
+    - service: script.solis_write_holding_register
+      data:
+        register_addr: 43141
+        register_value: "{{ charge_current * 10 }}"
+  mode: single
+solis_write_holding_register:
+  alias: Solis Write Holding Register
+  fields:
+    register_addr:
+      description: Holding address to write to
+      example: 43141
+    register_value:
+      description: Value to write to holding address
+      example: 500
+  sequence:
+    - service: modbus.write_register
+      data:
+        address: "{{ register_addr }}"
+        slave: 1
+        value: "{{ register_value }}"
+        hub: solis
+    - service: logbook.log
+      data:
+        message: Send {{register_value}} to {{register_addr}}
+        name: Solis Write
+solis_set_eco7_times:
+  alias: Solis Set Eco7 Times
+  sequence:
+    - service: script.solis_write_holding_register
+      data:
+        register_addr: 43143
+        register_value:
+          "{{(states('input_datetime.economy_7_start')).split(':')[0]
+          | int}}"
+    - service: script.solis_write_holding_register
+      data:
+        register_addr: 43144
+        register_value:
+          "{{(states('input_datetime.economy_7_start')).split(':')[1]
+          | int}}"
+    - service: script.solis_write_holding_register
+      data:
+        register_addr: 43145
+        register_value:
+          "{{(states('input_datetime.economy_7_end')).split(':')[0]
+          | int}}"
+    - service: script.solis_write_holding_register
+      data:
+        register_addr: 43146
+        register_value:
+          "{{(states('input_datetime.economy_7_end')).split(':')[1]
+          | int}}"
+  mode: single
+  icon: mdi:battery-clock-outline

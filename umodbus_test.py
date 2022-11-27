@@ -35,6 +35,20 @@ payloads = [
         "scale": 1,
         "uom": "%",
     },
+    {
+        "desc": "Battery Storage Mode (W)",
+        "addrs": 43110,
+        "len": 1,
+        "scale": 1,
+        "uom": "",
+    },
+    {
+        "desc": "Battery Storage Mode (R)",
+        "addrs": 33132,
+        "len": 1,
+        "scale": 1,
+        "uom": "",
+    },
 ]
 
 # Enable values to be signed (default is False).
