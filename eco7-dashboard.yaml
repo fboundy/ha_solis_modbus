@@ -65,7 +65,9 @@ views:
               - entity: input_datetime.economy_7_start
               - entity: input_datetime.economy_7_end
               - entity: sensor.solis_eco7_time_remaining
+              - entity: input_number.eco7_target_soc
               - entity: sensor.solis_eco7_charge_current
+
             title: Economy 7 Charging
             state_color: true
           - type: history-graph

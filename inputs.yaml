@@ -41,3 +41,14 @@ input_datetime:
     has_date: false
     has_time: true
     icon: mdi:clock-digital
+
+input_number:
+  eco7_target_soc:
+    name: Economy 7 Target SOC
+    initial: 100
+    mode: box
+    unit_of_measurement: "%"
+    min: 0
+    max: 100
+    step: 1
+    icon: mdi:battery

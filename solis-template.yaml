@@ -75,7 +75,7 @@ template:
         state: >-
           {{(
           ((states('input_number.solis_battery_capacity') | int * 1000) *
-          ((states('sensor.solis_opt_target_soc') | int) - (states('sensor.solis_battery_soc') | int))
+          ((states('input_number.eco7_target_soc') | int) - (states('sensor.solis_battery_soc') | int))
           ) 
           / 10
           / 
