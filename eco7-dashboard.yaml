@@ -1,0 +1,75 @@
+views:
+  - theme: Backend-selected
+    title: Home
+    type: custom:vertical-layout
+    badges: []
+    cards:
+      - type: horizontal-stack
+        cards:
+          - type: gauge
+            entity: sensor.solis_inverter_dc_power
+            min: 0
+            max: 5000
+            name: Solar
+          - type: gauge
+            entity: sensor.daily_solar
+            name: Daily Solar
+      - type: horizontal-stack
+        cards:
+          - type: gauge
+            entity: sensor.solis_house_load_power
+            max: 4000
+            min: 0
+            name: Load
+          - type: gauge
+            entity: sensor.solis_battery_soc
+            severity:
+              green: 20
+              yellow: 15
+              red: 12
+            name: Battery SOC
+      - type: horizontal-stack
+        cards:
+          - type: entity
+            entity: sensor.solis_grid_mode
+            name: Grid Mode
+            state_color: true
+            icon: mdi:sync
+            card_mod:
+              style: |
+                ha-card {
+                  {% if (states('sensor.solis_grid_mode')) == 'Import' -%}
+                    --ha-card-background: darkred; color: white);
+                  {%- else -%}
+                    --ha-card-background: darkgreen; color: white);}
+                  {%- endif %}
+                }
+          - type: entity
+            entity: sensor.solis_battery_mode
+            name: Battery Mode
+            icon: mdi:battery-arrow-up
+            card_mod:
+              style: |
+                ha-card {
+                  {% if (states('sensor.solis_battery_mode')) == 'Discharge' -%}
+                    --ha-card-background: darkred; color: white);
+                  {%- else -%}
+                    --ha-card-background: darkgreen; color: white);}
+                  {%- endif %}
+                }
+      - type: custom:stack-in-card
+        cards:
+          - type: entities
+            entities:
+              - entity: input_boolean.solis_eco7_charging
+              - entity: input_datetime.economy_7_start
+              - entity: input_datetime.economy_7_end
+              - entity: sensor.solis_eco7_time_remaining
+              - entity: sensor.solis_eco7_charge_current
+            title: Economy 7 Charging
+            state_color: true
+          - type: history-graph
+            entities:
+              - entity: sensor.solis_battery_soc
+            hours_to_show: 12
+            ymax: 100

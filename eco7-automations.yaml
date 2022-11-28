@@ -1,0 +1,72 @@
+automations:
+  - id: "1669414355762"
+    alias: Sync Solis Mode to Eco7 Mode
+    description: If the Eco7 toggle changes, the inverter 'Grid Charging' and 'Timed Charging' toggles are set to match it.
+    trigger:
+      - platform: state
+        entity_id:
+          - input_boolean.solis_eco7_charging
+    condition: []
+    action:
+      - service: input_boolean.turn_{{ trigger.to_state.state }}
+        entity_id: input_boolean.solis_storage_mode_grid_charge
+      - delay:
+          hours: 0
+          minutes: 0
+          seconds: 5
+          milliseconds: 0
+      - service: input_boolean.turn_{{ trigger.to_state.state }}
+        entity_id: input_boolean.solis_storage_mode_timed
+    mode: single
+  #
+  #
+  - id: "1669139628337"
+    alias: Set Eco7 Charge Current
+    description: Sets the Eco7 Charge Current at the start of the Eco7 period every 30 minutes during the Eco7 Period provided the Eco7 input_boolean is on
+    trigger:
+      - platform: time_pattern
+        minutes: "0"
+      - platform: time_pattern
+        minutes: "30"
+      - platform: time
+        at: input_datetime.economy_7_start
+    condition:
+      - condition: and
+        conditions:
+          - condition: state
+            entity_id: input_boolean.solis_eco7_charging
+            state: "on"
+          - condition: time
+            before: input_datetime.economy_7_end
+            after: input_datetime.economy_7_start
+        enabled: false
+      - condition: template
+        value_template:
+          "{{(now() >= today_at(states('input_datetime.economy_7_start')))
+
+          and (now() < today_at(states('input_datetime.economy_7_end')))
+
+          and states('input_boolean.solis_eco7_charging') == 'on'}}"
+    action:
+      - service: script.solis_set_charge_current
+        data:
+          charge_current: "{{states('sensor.solis_eco7_charge_current') | float}}"
+    mode: single
+
+  - id: "1669145089862"
+    alias: Solis Set Eco7 Charge Times
+    description: "Changes the Fixed Charging times on the inverter whenever the Economy 7 input_datetime entities change"
+    trigger:
+      - platform: state
+        entity_id:
+          - input_datetime.economy_7_start
+          - input_datetime.economy_7_end
+    condition:
+      - condition: template
+        value_template:
+          "{{strptime(states('input_datetime.economy_7_end'),'%H:%M:%S').time()
+          >strptime(states('input_datetime.economy_7_start'),'%H:%M:%S').time()}}"
+    action:
+      - service: script.solis_set_eco7_times
+        data: {}
+    mode: single
