@@ -1,7 +1,8 @@
 - name: "solis"
   type: tcp
   host: !secret solis_ip
-  port: 8899
+  port: 8899  # for DLS-LAN sticks
+  #  port: 502   # for S2-WL-ST sticks
   sensors:
     - name: Solis Temperature
       slave: 1
@@ -272,7 +273,59 @@
       device_class: current
       state_class: measurement
       unit_of_measurement: A
-
+    - name: Solis Battery Charge Current Limit (BMS)
+      slave: 1
+      address: 33143
+      count: 1
+      input_type: input
+      data_type: uint16
+      lazy_error_count: 5
+      scan_interval: 60
+      scale: 0.1
+      precision: 1
+      device_class: current
+      state_class: measurement
+      unit_of_measurement: A
+    - name: Solis Battery Discharge Current Limit (BMS)
+      slave: 1
+      address: 33144
+      count: 1
+      input_type: input
+      data_type: uint16
+      lazy_error_count: 5
+      scan_interval: 60
+      scale: 0.1
+      precision: 1
+      device_class: current
+      state_class: measurement
+      unit_of_measurement: A
+    - name: Solis Battery Charge Current Limit
+      slave: 1
+      address: 33206
+      count: 1
+      input_type: input
+      data_type: uint16
+      lazy_error_count: 5
+      scan_interval: 60
+      scale: 0.1
+      precision: 1
+      device_class: current
+      state_class: measurement
+      unit_of_measurement: A
+    - name: Solis Battery Discharge Current Limit
+      slave: 1
+      address: 33207
+      count: 1
+      input_type: input
+      data_type: uint16
+      lazy_error_count: 5
+      scan_interval: 60
+      scale: 0.1
+      precision: 1
+      device_class: current
+      state_class: measurement
+      unit_of_measurement: A
+      
     # Battery Totals
     - name: Solis Daily Battery Charge
       slave: 1

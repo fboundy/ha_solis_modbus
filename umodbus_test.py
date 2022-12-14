@@ -10,8 +10,10 @@ from umodbus import conf
 from umodbus.client import tcp
 
 # configuration
-CFG_IP = "192.168.4.79"  # Update with your inverter IP
-CFG_PORT = 8899
+CFG_IP = "192.168.4.236"  # Update with your inverter IP
+CFG_PORT = 8899  # old series 1920xxxxxx DLS-L
+CFG_PORT = 502  # new S2-WL-ST stick serial number 7Axxx
+
 
 payloads = [
     {
