@@ -177,3 +177,4 @@ solis_set_eco7_times:
           | int}}"
   mode: single
   icon: mdi:battery-clock-outline
+
