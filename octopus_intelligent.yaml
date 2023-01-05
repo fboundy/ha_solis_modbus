@@ -1,0 +1,63 @@
+# I'm on Octopus Intelligent which means I get 6 hours at the cheap rate guaranteed 
+# - 23:30 -05:30. But I also sometimes get the cheap rate outside of those times. 
+# This is decided by Octopus when I plug my car in. So I needed to be able to detect 
+# this and stop my house batteries discharging in to the car. To achieve this I leave 
+# charge times for slot 1 set to my guaranteed off peak times, and manipulate slot 2 
+# when their are extras. I do this in quite a basic way. There is an Octopus Intelligent
+# HA integration which has a switch that reflects if your account is currently benefitting
+# from the cheap rate. I use this to trigger a script that sets the 'charge 2' slot to 
+# 05:31-23:29 if the current time is outside of the usual cheap window. Effectively 
+# forcing it to charge.
+
+# Automation:
+# -----------
+
+alias: Battery Force Charge
+description: Forces battery to charge when Octopus intelligent rate is cheap
+trigger:
+  - type: turned_on
+    platform: device
+    device_id: 52eae951b4976236251ea7c7c31698f4
+    entity_id: binary_sensor.octopus_intelligent_slot
+    domain: binary_sensor
+condition:
+  - condition: time
+    after: "05:30:00"
+    before: "23:30:00"
+    weekday:
+      - mon
+      - tue
+      - wed
+      - thu
+      - fri
+      - sat
+      - sun
+action:
+  - service: script.solis_force_charge_on
+    data: {}
+mode: single
+
+# Script:
+# -------
+
+solis_force_charge_on:                          
+  alias: Solis Force Charge On                        
+  sequence:                                     
+  - service: script.solis_write_holding_register         
+    data:                                       
+      register_addr: 43153                      
+      register_value: 05                                                         
+  - service: script.solis_write_holding_register
+    data:                                                  
+      register_addr: 43154                                                       
+      register_value: 30                        
+  - service: script.solis_write_holding_register
+    data:                                                      
+      register_addr: 43155                      
+      register_value: 23                        
+  - service: script.solis_write_holding_register          
+    data:                                       
+      register_addr: 43156                                                           
+      register_value: 29                              
+  mode: single                                  
+  icon: mdi:battery-clock-outline 
