@@ -82,7 +82,7 @@
       scale: 0.1
       precision: 1
       device_class: energy
-      state_class: total_increasing_increasing
+      state_class: total_increasing
       unit_of_measurement: kWh
     - name: Solis Daily Energy Exported
       slave: 1
@@ -95,7 +95,7 @@
       scale: 0.1
       precision: 1
       device_class: energy
-      state_class: total_increasing_increasing
+      state_class: total_increasing
       unit_of_measurement: kWh
     - name: Solis Total Energy Imported
       slave: 1
