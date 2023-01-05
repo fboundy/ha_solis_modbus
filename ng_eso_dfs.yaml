@@ -1,0 +1,53 @@
+# sensor for National Grid ESO Demand Flexibility Test Event start and end times
+
+# Assumes that entry 0 is the most recent data and looks for earlies start and latest
+# end on that date
+
+sensor:
+  - platform: rest
+    resource: https://data.nationalgrideso.com/api/3/action/datastore_search?resource_id=000066dc-aa75-4bec-a5a2-9c935b1873d2
+    scan_interval: 900
+    name: National Grid ESO Latest DFS Start
+    value_template: >-
+      {% 
+      set d = value_json['result']['records'][0]['Delivery Date'] 
+      %}
+
+      {% 
+      set ns=namespace(start_time = strptime(d+value_json['result']['records'][0]['From GMT'],'%Y-%m-%d%H:%M'))
+      %}
+
+
+      {% for record in value_json['result']['records'] %}
+        {% if record['Delivery Date'] == d -%}
+          {% if strptime(d+record['From GMT'],'%Y-%m-%d%H:%M') <= ns.start_time -%}
+            {% set ns.start_time = strptime(d+record['From GMT'],'%Y-%m-%d%H:%M') %}
+          {%- endif %}
+        {%- endif %}
+      {% endfor %}
+
+      {{ns.start_time}}
+
+  - platform: rest
+    resource: https://data.nationalgrideso.com/api/3/action/datastore_search?resource_id=000066dc-aa75-4bec-a5a2-9c935b1873d2
+    scan_interval: 900
+    name: National Grid ESO Latest DFS End
+    value_template: >-
+      {% 
+      set d = value_json['result']['records'][0]['Delivery Date'] 
+      %}
+
+      {% 
+      set ns=namespace(end_time = strptime(d+value_json['result']['records'][0]['To GMT'],'%Y-%m-%d%H:%M'))
+      %}
+
+
+      {% for record in value_json['result']['records'] %}
+        {% if record['Delivery Date'] == d -%}
+          {% if strptime(d+record['To GMT'],'%Y-%m-%d%H:%M') >= ns.end_time -%}
+            {% set ns.end_time = strptime(d+record['To GMT'],'%Y-%m-%d%H:%M') %}
+          {%- endif %}
+        {%- endif %}
+      {% endfor %}
+
+      {{ns.end_time}}
