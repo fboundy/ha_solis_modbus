@@ -78,3 +78,8 @@ Also included is a small Python script `modbus_test.py` 2hich will check modbus 
     Inverter Temperature:     30.3 C
     Grid Voltage:            243.3 V
     Battery SOC:              15.0 %
+
+The following YAML files are also included:
+
+    octopus-intelligent.yaml - scripts and automations by @robjwalker to assist with Octopus Intelligent tariffs
+    ng_eso_dfs.yaml          - sensors to detect the most recent National Grid ESO Demand Flexibility Service slot start and end times
