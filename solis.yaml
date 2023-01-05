@@ -2,6 +2,8 @@
   type: tcp
   host: !secret solis_ip
   port: 502   # for S2-WL-ST sticks
+  # port: 8899  # for DLS-L sticks
+
   sensors:
     - name: Solis Temperature
       slave: 1
@@ -12,7 +14,7 @@
       data_type: uint16
       lazy_error_count: 5
       scan_interval: 60
-      device_class: Temperature
+      device_class: temperature
       state_class: measurement
       unit_of_measurement: C
 
