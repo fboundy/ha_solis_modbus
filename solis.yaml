@@ -830,7 +830,7 @@
       state_class: measurement
     - name: Solis Timed Discharge 2 End Minute
       slave: 1
-      address: 431560
+      address: 43160
       count: 1
       input_type: holding
       data_type: uint16
