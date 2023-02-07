@@ -16,7 +16,7 @@
       scan_interval: 60
       device_class: temperature
       state_class: measurement
-      unit_of_measurement: C
+      unit_of_measurement: °C
 
     # Grid
     - name: Solis Grid Frequency
