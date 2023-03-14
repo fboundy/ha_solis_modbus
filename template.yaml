@@ -1,0 +1,19 @@
+  - sensor:    
+      name: 'Target Battery Charge Weekday'
+      unique_id: 'sensor.target_battery_charge_weekday'
+      unit_of_measurement: '%'
+      icon: mdi:battery-90
+      state: >
+        {% set charge_end = states('input_number.end_of_day_charge_required') | float %}
+        {% set charge_now = states('input_number.start_of_day_charge_required') | float  %}
+        {% set home_consumption = states('input_number.daytime_charge_required') | float  %}
+        {% set forecast = states('sensor.energy_production_today') | float %}
+        {% set capacity = 13 %}
+        {% set target_charge = ((charge_end + charge_now + home_consumption - forecast) / capacity) * 100 %}
+        {% if target_charge < 32 %}
+          {{ 32 }}
+        {% elif target_charge > 100 %}
+          {{ 100 }}
+        {% else %}
+          {{ target_charge | round(0, default=0)  }}
+        {% endif %}
