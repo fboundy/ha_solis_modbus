@@ -1,7 +1,11 @@
 # ha_solis_modbus
 
 <H2>Home Assistant YAML for Solis Hybrid Inverter using MODBUS</H2>
+This forked from https://github.com/fboundy/ha_solis_modbus and includes automations to set estimate an overnight target SOC to ensure enough power to run your house until the sun comes out while also leaving maximum space in your battery for energy capture. 
 
+Fill in the three input numbers for charge and set your usable battery capacity in the template sensor.
+
+Requires forcast.solar integration
 This is a Home Assistant YAML file for communicating with a Solis Hybrid inverter using a Data Logging Stick which uses pure Modbus over TCP. It has been tested using a Solis 5-eh1p(3-6)k inverter and:
 
 - DLS-LAN stick: Serial number 1920xxxxxx [as shown here](https://tenergise.co.uk/product/solis-data-logging-stick/)
