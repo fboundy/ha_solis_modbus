@@ -2,7 +2,7 @@
 
 <H2>Home Assistant YAML for Solis Hybrid Inverter using MODBUS</H2>
 
-This forked from https://github.com/fboundy/ha_solis_modbus and includes automations to set estimate an overnight target SOC to ensure enough power to run your house until the sun comes out while also leaving maximum space in your battery for energy capture. 
+This forked from https://github.com/fboundy/ha_solis_modbus and includes automations to estimate an overnight target SOC to ensure enough power to run your house until the sun comes out while also leaving maximum space in your battery for energy capture. 
 
 Fill in the three input numbers for charge and set your usable battery capacity in the template sensor.
 
