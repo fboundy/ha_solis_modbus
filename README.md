@@ -4,7 +4,7 @@
 
 This forked from https://github.com/fboundy/ha_solis_modbus and includes automations to estimate an overnight target SOC to ensure enough power to run your house until the sun comes out while also leaving maximum space in your battery for energy capture. 
 
-Fill in the three input numbers for charge and set your usable battery capacity in the template sensor.
+Fill in the three input numbers for charge, and set your usable battery capacity and solar prediction entity_id in the template sensor.
 
 Requires forcast.solar integration
 
