@@ -6,7 +6,11 @@ This forked from https://github.com/fboundy/ha_solis_modbus and includes automat
 
 Fill in the three input numbers for charge, and set your usable battery capacity and solar prediction entity_id in the template sensor.
 
-Requires forcast.solar integration
+Requires forcast.solar integration: https://www.home-assistant.io/integrations/forecast_solar/
+
+I plan to add support for setting battery discharge times and current to accomodate people who are on the new Octopus Flux tariff.
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 This is a Home Assistant YAML file for communicating with a Solis Hybrid inverter using a Data Logging Stick which uses pure Modbus over TCP. It has been tested using a Solis 5-eh1p(3-6)k inverter and:
 
