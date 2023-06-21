@@ -10,10 +10,25 @@ from umodbus import conf
 from umodbus.client import tcp
 
 # configuration
-CFG_IP = "192.168.4.236"  # Update with your inverter IP
-CFG_PORT = 8899  # old series 1920xxxxxx DLS-L
-CFG_PORT = 502  # new S2-WL-ST stick serial number 7Axxx
+CFG = {
+    'Waveshare': {
+        'IP': "192.168.4.40",
+        'PORT': 502,
+    },
 
+    'S2-WL': {
+        'IP': "192.168.4.237",
+        'PORT': 502,
+    }, 
+
+    'DLS-L': {
+        'IP': "192.168.4.79",
+        'PORT': 8899,
+    } 
+
+}  # Update with your inverter IP
+
+devices = ['S2-WL', 'Waveshare', ]
 
 payloads = [
     {
@@ -38,13 +53,6 @@ payloads = [
         "uom": "%",
     },
     {
-        "desc": "Battery Storage Mode (W)",
-        "addrs": 43110,
-        "len": 1,
-        "scale": 1,
-        "uom": "",
-    },
-    {
         "desc": "Battery Storage Mode (R)",
         "addrs": 33132,
         "len": 1,
@@ -55,14 +63,19 @@ payloads = [
 
 # Enable values to be signed (default is False).
 conf.SIGNED_VALUES = True
-sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-sock.connect((CFG_IP, CFG_PORT))
+sock = {}
+for device in devices:
+    sock[device] = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    sock[device].connect((CFG[device]['IP'], CFG[device]['PORT']))
+    print(f"Device: {device}")
+    print('-' * 32 + '\n')
+    for payload in payloads:
+        message = tcp.read_input_registers(slave_id=1, starting_address=payload["addrs"], quantity=payload["len"])
+        response = tcp.send_message(message, sock[device])
+        val = float(response[0]) * payload["scale"]
+        print(f"{(payload['desc']+':'):25s}{val:5.1f} {payload['uom']}")
 
-for payload in payloads:
-    message = tcp.read_input_registers(slave_id=1, starting_address=payload["addrs"], quantity=payload["len"])
-    response = tcp.send_message(message, sock)
-    val = float(response[0]) * payload["scale"]
-    print(f"{(payload['desc']+':'):25s}{val:5.1f} {payload['uom']}")
-
-sock.close()
+    print("\n\n")
+    sock[device].close()    
+    
 # %%

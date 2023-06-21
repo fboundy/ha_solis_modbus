@@ -55,7 +55,7 @@ template:
           + 32 * (states('input_boolean.solis_storage_mode_grid_charge') == 'on') | int 
           }}
 
-      - name: "Solis Eco7 Hours Remaining"
+      - name: "Solis Eco7 Time Remaining"
         unique_id: "Solis Eco7 Time Remaining"
         state_class: measurement
         state: >-
