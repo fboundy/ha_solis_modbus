@@ -48,6 +48,7 @@ The following scripts are included in `scripts.yaml` to assit with this:
 - Solis Set Eco7 Times: sets the 1st set of <b>Timed Charging Times</b> (Registers 43143 - 6) to the times specified by the `input_datetime` enties: `economy_7_start` and `economy_7_start`
 - Solis Set Energy Storage Mode: sets the <b>Energy Storage Control Switch</b>(Register 43110) to that specified by the six `input_boolean` entites `solis_storage_mode_*`
 - Set Solis Storage Toggles: sets the six `input_boolean` entites `solis_storage_mode_*` to match the values read from the inverter if they change (e.g. they are set manually on the inverter itself)
+- Solis Set Time: sets the time on the inverter to match Home Assistant
 
 <h3>Template Sensors</h3>
 
