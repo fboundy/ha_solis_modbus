@@ -70,6 +70,7 @@ A number of helpers are needed for the scripts and automations included below. T
        Bit 3 (8)  - Battery Wake-Up Mode  input_boolean.solis_storage_mode_wake_up
        Bit 4 (16) - Backup Mode           input_boolean.solis_storage_mode_backup
        Bit 5 (32) - Grid Charge Mode      input_boolean.solis_storage_mode_grid_charge
+       Bit 6 (64) - Feed-In Priority Mode input_boolean.solis_storage_mode_feed_in_priority
 
 <h3>Utilities</h3>
 
