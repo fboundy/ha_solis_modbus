@@ -5,6 +5,22 @@ set_solis_storage_toggles:
         - condition: template
           value_template:
             "{{states('sensor.solis_energy_storage_control_switch') |
+            int | bitwise_and(64) == 64}}"
+      then:
+        - service: input_boolean.turn_on
+          data: {}
+          target:
+            entity_id:
+              - input_boolean.solis_storage_mode_feed_in_priority
+      else:
+        - service: input_boolean.turn_off
+          data: {}
+          target:
+            entity_id: input_boolean.solis_storage_mode_feed_in_priority
+    - if:
+        - condition: template
+          value_template:
+            "{{states('sensor.solis_energy_storage_control_switch') |
             int | bitwise_and(32) == 32}}"
       then:
         - service: input_boolean.turn_on
@@ -97,6 +113,22 @@ set_solis_storage_toggles:
               - input_boolean.solis_storage_mode_spontaneous
   mode: single
   icon: mdi:toggle-switch-off-outline
+solis_set_time:
+  alias: Solis Set Time
+  sequence:
+  - service: script.solis_write_holding_register
+    data:
+      register_addr: 43003
+      register_value: '{{now().hour}}'
+  - service: script.solis_write_holding_register
+    data:
+      register_addr: 43004
+      register_value: '{{now().minute}}'
+  - service: script.solis_write_holding_register
+    data:
+      register_addr: 43005
+      register_value: '{{now().second}}'
+  mode: single
 solis_set_energy_storage_mode:
   alias: Solis Set Energy Storage Mode
   fields:

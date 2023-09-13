@@ -5,6 +5,120 @@
   # port: 8899  # for DLS-L sticks
 
   sensors:
+    - name: Solis Year RO
+      slave: 1
+      address: 33022
+      count: 1
+      scale: 1
+      input_type: input
+      data_type: uint16
+      lazy_error_count: 5
+      scan_interval: 60
+      state_class: measurement
+    - name: Solis Month RO
+      slave: 1
+      address: 33023
+      count: 1
+      scale: 1
+      input_type: input
+      data_type: uint16
+      lazy_error_count: 5
+      scan_interval: 60
+      state_class: measurement
+    - name: Solis Day RO
+      slave: 1
+      address: 33024
+      count: 1
+      scale: 1
+      input_type: input
+      data_type: uint16
+      lazy_error_count: 5
+      scan_interval: 60
+      state_class: measurement
+    - name: Solis Hour RO
+      slave: 1
+      address: 33025
+      count: 1
+      scale: 1
+      input_type: input
+      data_type: uint16
+      lazy_error_count: 5
+      scan_interval: 60
+      state_class: measurement
+    - name: Solis Minute RO
+      slave: 1
+      address: 33026
+      count: 1
+      scale: 1
+      input_type: input
+      data_type: uint16
+      lazy_error_count: 5
+      scan_interval: 60
+      state_class: measurement
+
+    - name: Solis Year RW
+      slave: 1
+      address: 43000
+      count: 1
+      scale: 1
+      input_type: holding
+      data_type: uint16
+      lazy_error_count: 5
+      scan_interval: 60
+      state_class: measurement
+    - name: Solis Month RW
+      slave: 1
+      address: 43001
+      count: 1
+      scale: 1
+      input_type: holding
+      data_type: uint16
+      lazy_error_count: 5
+      scan_interval: 60
+      state_class: measurement
+    - name: Solis Day RW
+      slave: 1
+      address: 43002
+      count: 1
+      scale: 1
+      input_type: holding
+      data_type: uint16
+      lazy_error_count: 5
+      scan_interval: 60
+      state_class: measurement
+    - name: Solis Hour RW
+      slave: 1
+      address: 43003
+      count: 1
+      scale: 1
+      input_type: holding
+      data_type: uint16
+      lazy_error_count: 5
+      scan_interval: 60
+      state_class: measurement
+    - name: Solis Minute RW
+      slave: 1
+      address: 43004
+      count: 1
+      scale: 1
+      input_type: holding
+      data_type: uint16
+      lazy_error_count: 5
+      scan_interval: 60
+      state_class: measurement
+    - name: Solis Second RW
+      slave: 1
+      address: 43005
+      count: 1
+      scale: 1
+      input_type: holding
+      data_type: uint16
+      lazy_error_count: 5
+      scan_interval: 60
+      state_class: measurement
+
+
+    # Temperature
     - name: Solis Temperature
       slave: 1
       address: 33093

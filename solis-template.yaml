@@ -1,5 +1,34 @@
 template:
   - sensor:
+      - name: Solis Date Time (Read Only)
+        unique_id: solis_date_time_ro
+        device_class: timestamp
+        state: >-
+          {% set y = states('sensor.solis_year_ro')%}
+          {% set m = states('sensor.solis_month_ro')%}
+          {% set d = states('sensor.solis_day_ro')%}
+          {% set h = states('sensor.solis_hour_ro')%}
+          {% set t = states('sensor.solis_minute_ro')%}
+
+          {% set dt = y + "-" + m + "-" + d + " " + h + ":" + t %}
+
+          {{as_local(strptime(dt, "%y-%m-%d %H:%M"))}}
+
+      - name: Solis Date Time (Read/Write)
+        unique_id: solis_date_time_rw
+        device_class: timestamp
+        state: >-
+          {% set y = states('sensor.solis_year_rw')%}
+          {% set m = states('sensor.solis_month_rw')%}
+          {% set d = states('sensor.solis_day_rw')%}
+          {% set h = states('sensor.solis_hour_rw')%}
+          {% set t = states('sensor.solis_minute_rw')%}
+          {% set s = states('sensor.solis_second_rw')%}
+
+          {% set dt = y + "-" + m + "-" + d + " " + h + ":" + t + ":" + s %}
+
+          {{as_local(strptime(dt, "%y-%m-%d %H:%M:%S"))}}
+
       - name: "Solis Grid Active Power (Negative)"
         unique_id: "Solis Grid Active Power (Negative)"
         unit_of_measurement: W
@@ -53,6 +82,7 @@ template:
           + 8 * (states('input_boolean.solis_storage_mode_wake_up') == 'on') | int 
           + 16 * (states('input_boolean.solis_storage_mode_backup') == 'on') | int 
           + 32 * (states('input_boolean.solis_storage_mode_grid_charge') == 'on') | int 
+          + 64 * (states('input_boolean.solis_solis_storage_mode_feed_in_priority') == 'on') | int 
           }}
 
       - name: "Solis Eco7 Time Remaining"

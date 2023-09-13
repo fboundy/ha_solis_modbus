@@ -1,4 +1,4 @@
-#%%
+# %%
 # This script will test umodbus comms to a Solis Hybrid Inverter with a DLS-L LAN Data Logger
 #
 # It requires the umodbus module
@@ -11,24 +11,24 @@ from umodbus.client import tcp
 
 # configuration
 CFG = {
-    'Waveshare': {
-        'IP': "192.168.4.40",
-        'PORT': 502,
+    "Waveshare": {
+        "IP": "192.168.4.40",
+        "PORT": 502,
     },
-
-    'S2-WL': {
-        'IP': "192.168.4.237",
-        'PORT': 502,
-    }, 
-
-    'DLS-L': {
-        'IP': "192.168.4.79",
-        'PORT': 8899,
-    } 
-
+    "S2-WL": {
+        "IP": "192.168.4.237",
+        "PORT": 502,
+    },
+    "DLS-L": {
+        "IP": "192.168.4.79",
+        "PORT": 8899,
+    },
 }  # Update with your inverter IP
 
-devices = ['S2-WL', 'Waveshare', ]
+devices = [
+    # 'S2-WL',
+    "Waveshare",
+]
 
 payloads = [
     {
@@ -66,9 +66,9 @@ conf.SIGNED_VALUES = True
 sock = {}
 for device in devices:
     sock[device] = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    sock[device].connect((CFG[device]['IP'], CFG[device]['PORT']))
+    sock[device].connect((CFG[device]["IP"], CFG[device]["PORT"]))
     print(f"Device: {device}")
-    print('-' * 32 + '\n')
+    print("-" * 32 + "\n")
     for payload in payloads:
         message = tcp.read_input_registers(slave_id=1, starting_address=payload["addrs"], quantity=payload["len"])
         response = tcp.send_message(message, sock[device])
@@ -76,6 +76,6 @@ for device in devices:
         print(f"{(payload['desc']+':'):25s}{val:5.1f} {payload['uom']}")
 
     print("\n\n")
-    sock[device].close()    
-    
+    sock[device].close()
+
 # %%

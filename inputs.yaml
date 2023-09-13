@@ -29,6 +29,9 @@ input_boolean:
   solis_storage_mode_spontaneous:
     name: Solis Storage Mode - Spontaneous
 
+  solis_storage_mode_feed_in_priority:
+    name: Solis Storage Mode - Feed-In Priority
+
 input_datetime:
   economy_7_start:
     name: Economy 7 Start
