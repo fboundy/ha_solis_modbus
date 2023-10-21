@@ -70,3 +70,24 @@ automations:
       - service: script.solis_set_eco7_times
         data: {}
     mode: single
+
+  - id: '1678731184170'
+    alias: Set Target SOC for Overnight Charging
+    description: ''
+    trigger:
+    - platform: time
+      at: 00:28:00
+    condition:
+    - condition: time
+      weekday:
+      - mon
+      - tue
+      - wed
+      - thu
+      - fri
+    action:
+    - service: input_number.set_value
+      entity_id: input_number.eco7_target_soc
+      data:
+        value: '{{ states(''sensor.target_battery_charge_weekday'') | int(0) }}'
+    mode: single

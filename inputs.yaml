@@ -75,3 +75,30 @@ input_number:
     max: 100
     step: 1
     icon: mdi:battery
+
+  end_of_day_charge_required:
+    name: End of Day Charge Required
+    mode: box
+    unit_of_measurement: "kWh"
+    min: 0
+    max: 13
+    step: 0.5
+    icon: mdi:home-battery
+    
+  start_of_day_charge_required:
+    name: Start of Day Charge Required
+    mode: box
+    unit_of_measurement: "kWh"
+    min: 0
+    max: 13
+    step: 0.5
+    icon: mdi:home-battery   
+    
+  daytime_charge_required:
+    name: Day Time Charge Required
+    mode: box
+    unit_of_measurement: "kWh"
+    min: 0
+    max: 13
+    step: 0.5
+    icon: mdi:home-battery  
