@@ -75,7 +75,7 @@ A number of helpers are needed for the scripts and automations included below. T
 
 <h3>Utilities</h3>
 
-Also included is a small Python script `modbus_test.py` 2hich will check modbus communications and, if all is well, will report back Inverter Temperature, Grid Voltage and Battery SOC:
+Also included is a small Python script `pymodbus_test.py` 2hich will check modbus communications and, if all is well, will report back Inverter Temperature, Grid Voltage and Battery SOC:
 
     Inverter Temperature:     30.3 C
     Grid Voltage:            243.3 V
