@@ -80,13 +80,17 @@ for device in devices:
         str = f"Device {device} connected at {CFG[device]['IP']}:{CFG[device]['PORT']}"
         print(str)
         print("-" * len(str) + "\n")
-        for j, sensor in enumerate(sensors[7:8]):
+        for j, sensor in enumerate(sensors[:8]):
             # fmt=f"8.{max(int(-np.log10(sensor['scale'])),0)}f"
             if sensor["input_type"] == "input":
-                result = client.read_input_registers(sensor["address"], count=sensor["count"], slave=sensor["slave"])
+                result = client.read_input_registers(
+                    sensor["address"], slave=sensor["slave"]
+                )
 
             elif sensor["input_type"] == "holding":
-                result = client.read_holding_registers(sensor["address"], count=sensor["count"], slave=sensor["slave"])
+                result = client.read_holding_registers(
+                    sensor["address"], slave=sensor["slave"]
+                )
 
             for i, register in enumerate(result.registers):
                 print(
@@ -94,7 +98,9 @@ for device in devices:
                 )
         print("\n\n")
     else:
-        print(f"Failed to connect to Device {device} at {device['IP']}:{device['PORT']}")
+        print(
+            f"Failed to connect to Device {device} at {device['IP']}:{device['PORT']}"
+        )
 
     client.close()
 

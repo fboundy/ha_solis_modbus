@@ -1,151 +1,156 @@
-template:
-  - sensor:
-      - name: Solis Date Time (Read Only)
-        unique_id: solis_date_time_ro
-        device_class: timestamp
-        state: >-
-          {% set y = states('sensor.solis_year_ro')%}
-          {% set m = states('sensor.solis_month_ro')%}
-          {% set d = states('sensor.solis_day_ro')%}
-          {% set h = states('sensor.solis_hour_ro')%}
-          {% set t = states('sensor.solis_minute_ro')%}
+sensor:
+  - name: Solis Daily Total load
+    unique_id: solis_daily_total_load
+    device_class: energy
+    state_class: total_increasing
+    unit_of_measurement: kWh
 
-          {% set dt = y + "-" + m + "-" + d + " " + h + ":" + t %}
+  - name: Solis Date Time (Read Only)
+    unique_id: solis_date_time_ro
+    device_class: timestamp
+    state: >-
+      {% set y = states('sensor.solis_year_ro')%}
+      {% set m = states('sensor.solis_month_ro')%}
+      {% set d = states('sensor.solis_day_ro')%}
+      {% set h = states('sensor.solis_hour_ro')%}
+      {% set t = states('sensor.solis_minute_ro')%}
 
-          {{as_local(strptime(dt, "%y-%m-%d %H:%M"))}}
+      {% set dt = y + "-" + m + "-" + d + " " + h + ":" + t %}
 
-      - name: Solis Date Time (Read/Write)
-        unique_id: solis_date_time_rw
-        device_class: timestamp
-        state: >-
-          {% set y = states('sensor.solis_year_rw')%}
-          {% set m = states('sensor.solis_month_rw')%}
-          {% set d = states('sensor.solis_day_rw')%}
-          {% set h = states('sensor.solis_hour_rw')%}
-          {% set t = states('sensor.solis_minute_rw')%}
-          {% set s = states('sensor.solis_second_rw')%}
+      {{as_local(strptime(dt, "%y-%m-%d %H:%M"))}}
 
-          {% set dt = y + "-" + m + "-" + d + " " + h + ":" + t + ":" + s %}
+  - name: Solis Date Time (Read/Write)
+    unique_id: solis_date_time_rw
+    device_class: timestamp
+    state: >-
+      {% set y = states('sensor.solis_year_rw')%}
+      {% set m = states('sensor.solis_month_rw')%}
+      {% set d = states('sensor.solis_day_rw')%}
+      {% set h = states('sensor.solis_hour_rw')%}
+      {% set t = states('sensor.solis_minute_rw')%}
+      {% set s = states('sensor.solis_second_rw')%}
 
-          {{as_local(strptime(dt, "%y-%m-%d %H:%M:%S"))}}
+      {% set dt = y + "-" + m + "-" + d + " " + h + ":" + t + ":" + s %}
 
-      - name: "Solis Grid Active Power (Negative)"
-        unique_id: "Solis Grid Active Power (Negative)"
-        unit_of_measurement: W
-        device_class: power
-        state_class: measurement
-        state: >-
-          {{ -1 * states('sensor.solis_grid_active_power') | float }}
+      {{as_local(strptime(dt, "%y-%m-%d %H:%M:%S"))}}
 
-      - name: "Solis Grid Export Power"
-        unique_id: "Solis Grid Export Power"
-        unit_of_measurement: W
-        device_class: power
-        state_class: measurement
-        state: >-
-          {% set state =  states.sensor.solis_grid_active_power.state | float %}
-          {{ state if state > 0 else 0 }}
+  - name: "Solis Grid Active Power (Negative)"
+    unique_id: "Solis Grid Active Power (Negative)"
+    unit_of_measurement: W
+    device_class: power
+    state_class: measurement
+    state: >-
+      {{ -1 * states('sensor.solis_grid_active_power') | float }}
 
-      - name: "Solis Grid Import Power"
-        unique_id: "Solis Grid Import Power"
-        unit_of_measurement: W
-        device_class: power
-        state_class: measurement
-        state: >-
-          {% set state =  states.sensor.solis_grid_active_power.state | float %}
-          {{ -1 * state if state < 0 else 0 }}
+  - name: "Solis Grid Export Power"
+    unique_id: "Solis Grid Export Power"
+    unit_of_measurement: W
+    device_class: power
+    state_class: measurement
+    state: >-
+      {% set state =  states.sensor.solis_grid_active_power.state | float %}
+      {{ state if state > 0 else 0 }}
 
-      - name: "Solis Grid Mode"
-        unique_id: "Solis Grid Mode"
-        state: >-
-          {% set state =  states.sensor.solis_grid_active_power.state | float %}
-          {% if state > 50 -%}
-            Export
-          {%- elif state <-50 -%}
-            Import
-          {%- else -%}
-            Zero
-          {%- endif %}
+  - name: "Solis Grid Import Power"
+    unique_id: "Solis Grid Import Power"
+    unit_of_measurement: W
+    device_class: power
+    state_class: measurement
+    state: >-
+      {% set state =  states.sensor.solis_grid_active_power.state | float %}
+      {{ -1 * state if state < 0 else 0 }}
 
-      - name: "Solis Battery Mode"
-        unique_id: "Solis Battery Mode"
-        state: >-
-          {% set state =  states.sensor.solis_battery_current_direction.state | int %}
-          {{ 'Discharge' if state > 0 else 'Charge' }}
+  - name: "Solis Grid Mode"
+    unique_id: "Solis Grid Mode"
+    state: >-
+      {% set state =  states.sensor.solis_grid_active_power.state | float %}
+      {% if state > 50 -%}
+        Export
+      {%- elif state <-50 -%}
+        Import
+      {%- else -%}
+        Zero
+      {%- endif %}
 
-      - name: "Solis Manual Storage Mode"
-        unique_id: "Solis Manual Storage Mode"
-        state: >-
-          {{(states('input_boolean.solis_storage_mode_spontaneous') == 'on') | int 
-          + 2 * (states('input_boolean.solis_storage_mode_timed') == 'on') | int 
-          + 4 * (states('input_boolean.solis_storage_mode_off_grid') == 'on') | int 
-          + 8 * (states('input_boolean.solis_storage_mode_wake_up') == 'on') | int 
-          + 16 * (states('input_boolean.solis_storage_mode_backup') == 'on') | int 
-          + 32 * (states('input_boolean.solis_storage_mode_grid_charge') == 'on') | int 
-          + 64 * (states('input_boolean.solis_solis_storage_mode_feed_in_priority') == 'on') | int 
-          }}
+  - name: "Solis Battery Mode"
+    unique_id: "Solis Battery Mode"
+    state: >-
+      {% set state =  states.sensor.solis_battery_current_direction.state | int %}
+      {{ 'Discharge' if state > 0 else 'Charge' }}
 
-      - name: "Solis Eco7 Time Remaining"
-        unique_id: "Solis Eco7 Time Remaining"
-        state_class: measurement
-        state: >-
-          {% if today_at(states('input_datetime.economy_7_end')) < now() -%}
-              {{(((today_at(states('input_datetime.economy_7_end')) - 
-                today_at(states('input_datetime.economy_7_start')))).total_seconds() / 36) | int / 100}}
-          {%- else -%}
-              {{max((((today_at(states('input_datetime.economy_7_end')) - 
-                max(now(), today_at(states('input_datetime.economy_7_start')))).total_seconds() / 36) | int) / 100,0)}}
-          {%- endif %}
+  - name: "Solis Manual Storage Mode"
+    unique_id: "Solis Manual Storage Mode"
+    state: >-
+      {{(states('input_boolean.solis_storage_mode_spontaneous') == 'on') | int 
+      + 2 * (states('input_boolean.solis_storage_mode_timed') == 'on') | int 
+      + 4 * (states('input_boolean.solis_storage_mode_off_grid') == 'on') | int 
+      + 8 * (states('input_boolean.solis_storage_mode_wake_up') == 'on') | int 
+      + 16 * (states('input_boolean.solis_storage_mode_backup') == 'on') | int 
+      + 32 * (states('input_boolean.solis_storage_mode_grid_charge') == 'on') | int 
+      + 64 * (states('input_boolean.solis_solis_storage_mode_feed_in_priority') == 'on') | int 
+      }}
 
-      - name: "Solis Eco7 Charge Current"
-        unique_id: "Solis Eco7 Charge Current"
-        device_class: current
-        state_class: measurement
-        unit_of_measurement: A
-        state: >-
-          {{(
-          ((states('input_number.solis_battery_capacity') | int * 1000) *
-          ((states('input_number.eco7_target_soc') | int) - (states('sensor.solis_battery_soc') | int))
-          ) 
-          / 10
-          / 
-          (states('sensor.solis_eco7_time_remaining') | float)
-          / (states('sensor.solis_battery_voltage_bms') | float) ) | int / 10
-          }}
+  - name: "Solis Eco7 Time Remaining"
+    unique_id: "Solis Eco7 Time Remaining"
+    state_class: measurement
+    state: >-
+      {% if today_at(states('input_datetime.economy_7_end')) < now() -%}
+          {{(((today_at(states('input_datetime.economy_7_end')) - 
+            today_at(states('input_datetime.economy_7_start')))).total_seconds() / 36) | int / 100}}
+      {%- else -%}
+          {{max((((today_at(states('input_datetime.economy_7_end')) - 
+            max(now(), today_at(states('input_datetime.economy_7_start')))).total_seconds() / 36) | int) / 100,0)}}
+      {%- endif %}
 
-      - name: "Solis Battery Charge Power"
-        unique_id: "Solis Battery Charge Power"
-        device_class: power
-        state_class: measurement
-        unit_of_measurement: W
-        state: >-
-          {% set state =  states.sensor.solis_battery_current_direction.state | int %}
-          {{ 0 if state > 0 else states('sensor.solis_battery_power') | float(2) }}
+  - name: "Solis Eco7 Charge Current"
+    unique_id: "Solis Eco7 Charge Current"
+    device_class: current
+    state_class: measurement
+    unit_of_measurement: A
+    state: >-
+      {{(
+      ((states('input_number.solis_battery_capacity') | int * 1000) *
+      ((states('input_number.eco7_target_soc') | int) - (states('sensor.solis_battery_soc') | int))
+      ) 
+      / 10
+      / 
+      (states('sensor.solis_eco7_time_remaining') | float)
+      / (states('sensor.solis_battery_voltage_bms') | float) ) | int / 10
+      }}
 
-      - name: "Solis Battery Discharge Power"
-        unique_id: "Solis Battery Discharge Power"
-        device_class: power
-        state_class: measurement
-        unit_of_measurement: W
-        state: >-
-          {% set state =  states.sensor.solis_battery_current_direction.state | int %}
-          {{ states('sensor.solis_battery_power') | float(2) if state > 0 else 0   }}
-   
-      name: 'Target Battery Charge Weekday'
-      unique_id: 'sensor.target_battery_charge_weekday'
-      unit_of_measurement: '%'
-      icon: mdi:battery-90
-      state: >
-        {% set charge_end = states('input_number.end_of_day_charge_required') | float %}
-        {% set charge_now = states('input_number.start_of_day_charge_required') | float  %}
-        {% set home_consumption = states('input_number.daytime_charge_required') | float  %}
-        {% set forecast = states('sensor.energy_production_today') | float %}
-        {% set capacity = 13 %}
-        {% set target_charge = ((charge_end + charge_now + home_consumption - forecast) / capacity) * 100 %}
-        {% if target_charge < 32 %}
-          {{ 32 }}
-        {% elif target_charge > 100 %}
-          {{ 100 }}
-        {% else %}
-          {{ target_charge | round(0, default=0)  }}
-        {% endif %}
+  - name: "Solis Battery Charge Power"
+    unique_id: "Solis Battery Charge Power"
+    device_class: power
+    state_class: measurement
+    unit_of_measurement: W
+    state: >-
+      {% set state =  states.sensor.solis_battery_current_direction.state | int %}
+      {{ 0 if state > 0 else states('sensor.solis_battery_power') | float(2) }}
+
+  - name: "Solis Battery Discharge Power"
+    unique_id: "Solis Battery Discharge Power"
+    device_class: power
+    state_class: measurement
+    unit_of_measurement: W
+    state: >-
+      {% set state =  states.sensor.solis_battery_current_direction.state | int %}
+      {{ states('sensor.solis_battery_power') | float(2) if state > 0 else 0   }}
+
+  - name: 'Target Battery Charge Weekday'
+    unique_id: 'sensor.target_battery_charge_weekday'
+    unit_of_measurement: '%'
+    icon: mdi:battery-90
+    state: >
+      {% set charge_end = states('input_number.end_of_day_charge_required') | float %}
+      {% set charge_now = states('input_number.start_of_day_charge_required') | float  %}
+      {% set home_consumption = states('input_number.daytime_charge_required') | float  %}
+      {% set forecast = states('sensor.energy_production_today') | float %}
+      {% set capacity = 13 %}
+      {% set target_charge = ((charge_end + charge_now + home_consumption - forecast) / capacity) * 100 %}
+      {% if target_charge < 32 %}
+        {{ 32 }}
+      {% elif target_charge > 100 %}
+        {{ 100 }}
+      {% else %}
+        {{ target_charge | round(0, default=0)  }}
+      {% endif %}
