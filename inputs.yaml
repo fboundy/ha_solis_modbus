@@ -56,6 +56,16 @@ input_number:
     step: 1
     icon: mdi:battery
 
+ flux_target_soc:
+    name: Flux Discharge Target SOC
+    initial: 60
+    mode: box
+    unit_of_measurement: "%"
+    min: 0
+    max: 100
+    step: 1
+    icon: mdi:battery  
+
   solis_battery_capacity:
     name: Solis Battery Capacity
     initial: 5
