@@ -95,7 +95,7 @@ automations:
   - id: '1678731184171'
     alias: Set Flux Discharge Current
     description: >-
-       Sets the Flux Discharge Current at the start of the Flux period every 30
+       Sets the Flux Discharge Current at the start of the Flux period every 5
        minutes during the Flux Period provided the Flux input_boolean is on
      trigger:
        - platform: time_pattern
@@ -119,7 +119,7 @@ automations:
   - id: '1678731184172'
      alias: " Solis Set Flux Discharge Times "
      description: >-
-       Changes the Fixed Charging times on the inverter whenever the Flux
+       Changes the Fixed Discharging times on the inverter whenever the Flux
        input_datetime entities change
       trigger:
        - platform: time_pattern
