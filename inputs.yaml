@@ -45,6 +45,18 @@ input_datetime:
     has_time: true
     icon: mdi:clock-digital
 
+  flux_discharge_start:
+    name: Discharge Start
+    has_date: false
+    has_time: true
+    icon: mdi:clock-digital
+
+  flux_discharge_end:
+    name: Discharge End
+    has_date: false
+    has_time: true
+    icon: mdi:clock-digital
+
 input_number:
   eco7_target_soc:
     name: Economy 7 Target SOC
