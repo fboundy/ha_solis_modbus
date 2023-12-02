@@ -7,6 +7,10 @@ input_boolean:
     name: Solis Eco7 Charging
     icon: mdi:flash
 
+  solis_flux_discharging:
+    name: Octopus Flux Discharging
+    icon: mdi:battery-charging-high
+
   saver_session:
     name: Saver Session
     icon: mdi:transmission-tower
