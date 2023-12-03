@@ -50,7 +50,15 @@
       lazy_error_count: 5
       scan_interval: 60
       state_class: measurement
-
+    - name: Solis Second RO
+      slave: 1
+      address: 33027
+      scale: 1
+      input_type: input
+      data_type: uint16
+      lazy_error_count: 5
+      scan_interval: 60
+      state_class: measurement
     - name: Solis Year RW
       slave: 1
       address: 43000
