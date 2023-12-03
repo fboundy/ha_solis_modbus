@@ -101,6 +101,18 @@ sensor:
           {{max((((today_at(states('input_datetime.economy_7_end')) - 
             max(now(), today_at(states('input_datetime.economy_7_start')))).total_seconds() / 36) | int) / 100,0)}}
       {%- endif %}
+ 
+  -  name: "Solis Flux Discharge Hours Remaining"
+      unique_id: "Solis Flux Discharge Time Remaining"
+      state_class: measurement
+      state: >-
+        {% if today_at(states('input_datetime.flux_discharge_end')) < now() -%}
+            {{(((today_at(states('input_datetime.flux_discharge_end')) - 
+              today_at(states('input_datetime.flux_discharge_start')))).total_seconds() / 36) | int / 100}}
+        {%- else -%}
+            {{max((((today_at(states('input_datetime.flux_discharge_end')) - 
+              max(now(), today_at(states('input_datetime.flux_discharge_start')))).total_seconds() / 36) | int) / 100,0)}}
+        {%- endif %}
 
   - name: "Solis Eco7 Charge Current"
     unique_id: "Solis Eco7 Charge Current"
@@ -117,6 +129,23 @@ sensor:
       (states('sensor.solis_eco7_time_remaining') | float)
       / (states('sensor.solis_battery_voltage_bms') | float) ) | int / 10
       }}
+
+ 
+  - name: "Solis Flux Discharge Current"
+    unique_id: "Solis Flux Discharge Current"
+    device_class: current
+    state_class: measurement
+    unit_of_measurement: A
+    state: >-
+       {% set value = (
+       ((states('input_number.solis_battery_capacity') | int * 1000) *
+       ((states('sensor.solis_battery_soc') | int) - (states('input_number.flux_target_soc') | int))
+       ) 
+       / 10
+      / 
+       (states('sensor.solis_flux_discharge_hours_remaining') | float)
+       / (states('sensor.solis_battery_voltage_bms') | float) ) | int / 10 %}
+      {{ value if value >= 0 else 0 }}
 
   - name: "Solis Battery Charge Power"
     unique_id: "Solis Battery Charge Power"

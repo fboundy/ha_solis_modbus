@@ -210,3 +210,36 @@ solis_set_eco7_times:
   mode: single
   icon: mdi:battery-clock-outline
 
+alias: "Solis Set Discharge Current "
+sequence:
+  - service: script.solis_write_holding_register
+    data:
+      register_addr: 43142
+      register_value: "{{ discharge_current * 10 }}"
+fields:
+  solis_set_charge_current:
+    description: Fixed time charge current (A)
+    example: 50
+mode: single
+
+alias: Solis Set Discharge Times
+sequence:
+  - service: script.solis_write_holding_register
+    data:
+      register_addr: 43147
+      register_value: "{{(states('input_datetime.flux_discharge_start')).split(':')[0] | int}}"
+  - service: script.solis_write_holding_register
+    data:
+      register_addr: 43148
+      register_value: "{{(states('input_datetime.flux_discharge_start')).split(':')[1] | int}}"
+  - service: script.solis_write_holding_register
+    data:
+      register_addr: 43149
+      register_value: "{{(states('input_datetime.flux_discharge_end')).split(':')[0] | int}}"
+  - service: script.solis_write_holding_register
+    data:
+      register_addr: 43150
+      register_value: "{{(states('input_datetime.flux_discharge_end')).split(':')[1] | int}}"
+mode: single
+icon: mdi:battery-clock-outline
+

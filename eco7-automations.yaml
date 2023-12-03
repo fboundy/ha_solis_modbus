@@ -91,3 +91,53 @@ automations:
       data:
         value: '{{ states(''sensor.target_battery_charge_weekday'') | int(0) }}'
     mode: single
+
+  - id: '1678731184171'
+    alias: Set Flux Discharge Current
+    description: >-
+       Sets the Flux Discharge Current at the start of the Flux period every 5
+       minutes during the Flux Period provided the Flux input_boolean is on
+     trigger:
+       - platform: time_pattern
+         minutes: "0"
+       - platform: time_pattern
+         minutes: /5
+       - platform: time
+         at: input_datetime.flux_discharge_start
+     condition:
+      - condition: template
+        value_template: >-
+          {{(now() >= today_at(states('input_datetime.flux_discharge_start'))) and
+          (now() < today_at(states('input_datetime.flux_discharge_end'))) and
+          states('input_boolean.solis_flux_discharging') == 'on'}}
+    action:
+      - service: script.solis_set_discharge_current
+        data:
+          discharge_current: "{{states('sensor.solis_flux_discharge_current_template') | float}}"
+    mode: restart
+
+  - id: '1678731184172'
+     alias: " Solis Set Flux Discharge Times "
+     description: >-
+       Changes the Fixed Discharging times on the inverter whenever the Flux
+       input_datetime entities change
+      trigger:
+       - platform: time_pattern
+         minutes: /5
+       - platform: state
+         entity_id:
+           - input_boolean.solis_flux_discharging
+     condition:
+       - condition: template
+         value_template: >-
+           {{strptime(states('input_datetime.flux_discharge_end'),'%H:%M:%S').time()
+           >strptime(states('input_datetime.flux_discharge_start'),'%H:%M:%S').time()}}
+     action:
+       - delay:
+           hours: 0
+           minutes: 0
+           seconds: 10
+           milliseconds: 0
+       - service: script.solis_set_flux_times
+         data: {}
+     mode: single

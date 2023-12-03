@@ -8,7 +8,7 @@ Fill in the three input numbers for charge, and set your usable battery capacity
 
 Requires forcast.solar integration: https://www.home-assistant.io/integrations/forecast_solar/
 
-I plan to add support for setting battery discharge times and current to accomodate people who are on the new Octopus Flux tariff. Everything is written for this and being tested now. I should be able to upload in the next week or so.
+I have also added support for Discharging - can be used for Flux to discharge at peak times, for Octopus saving sessions. I also use this to dump excess enegry into my EV overnight. It works exactly as the charging. Fill in the inputs for start and stop times and target SOC, the automations do the rest!
 
 
 -------------------------------------------------------------------------------------------------------------------------------------------------------------
