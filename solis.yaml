@@ -11,7 +11,6 @@
       scale: 1
       input_type: input
       data_type: uint16
-      lazy_error_count: 5
       scan_interval: 60
       state_class: measurement
     - name: Solis Month RO
@@ -20,7 +19,6 @@
       scale: 1
       input_type: input
       data_type: uint16
-      lazy_error_count: 5
       scan_interval: 60
       state_class: measurement
     - name: Solis Day RO
@@ -29,7 +27,6 @@
       scale: 1
       input_type: input
       data_type: uint16
-      lazy_error_count: 5
       scan_interval: 60
       state_class: measurement
     - name: Solis Hour RO
@@ -38,7 +35,6 @@
       scale: 1
       input_type: input
       data_type: uint16
-      lazy_error_count: 5
       scan_interval: 60
       state_class: measurement
     - name: Solis Minute RO
@@ -47,7 +43,6 @@
       scale: 1
       input_type: input
       data_type: uint16
-      lazy_error_count: 5
       scan_interval: 60
       state_class: measurement
     - name: Solis Second RO
@@ -56,7 +51,6 @@
       scale: 1
       input_type: input
       data_type: uint16
-      lazy_error_count: 5
       scan_interval: 60
       state_class: measurement
     - name: Solis Year RW
@@ -65,7 +59,6 @@
       scale: 1
       input_type: holding
       data_type: uint16
-      lazy_error_count: 5
       scan_interval: 60
       state_class: measurement
     - name: Solis Month RW
@@ -74,7 +67,6 @@
       scale: 1
       input_type: holding
       data_type: uint16
-      lazy_error_count: 5
       scan_interval: 60
       state_class: measurement
     - name: Solis Day RW
@@ -83,7 +75,6 @@
       scale: 1
       input_type: holding
       data_type: uint16
-      lazy_error_count: 5
       scan_interval: 60
       state_class: measurement
     - name: Solis Hour RW
@@ -92,7 +83,6 @@
       scale: 1
       input_type: holding
       data_type: uint16
-      lazy_error_count: 5
       scan_interval: 60
       state_class: measurement
     - name: Solis Minute RW
@@ -101,7 +91,6 @@
       scale: 1
       input_type: holding
       data_type: uint16
-      lazy_error_count: 5
       scan_interval: 60
       state_class: measurement
     - name: Solis Second RW
@@ -110,7 +99,6 @@
       scale: 1
       input_type: holding
       data_type: uint16
-      lazy_error_count: 5
       scan_interval: 60
       state_class: measurement
 
@@ -122,7 +110,6 @@
       scale: 0.1
       input_type: input
       data_type: uint16
-      lazy_error_count: 5
       scan_interval: 60
       device_class: temperature
       state_class: measurement
@@ -134,7 +121,6 @@
       address: 33282
       input_type: input
       data_type: uint16
-      lazy_error_count: 5
       scan_interval: 60
       scale: 0.01
       precision: 1
@@ -146,7 +132,6 @@
       address: 33251
       input_type: input
       data_type: uint16
-      lazy_error_count: 5
       scan_interval: 60
       scale: 0.1
       precision: 1
@@ -158,7 +143,6 @@
       address: 33252
       input_type: input
       data_type: uint16
-      lazy_error_count: 5
       scan_interval: 60
       scale: 0.01
       precision: 1
@@ -171,7 +155,6 @@
       # count: 2
       input_type: input
       data_type: int32
-      lazy_error_count: 5
       scan_interval: 60
       scale: 1
       precision: 1
@@ -185,7 +168,6 @@
       address: 33171
       input_type: input
       data_type: uint16
-      lazy_error_count: 5
       scan_interval: 300
       scale: 0.1
       precision: 1
@@ -197,7 +179,6 @@
       address: 33175
       input_type: input
       data_type: uint16
-      lazy_error_count: 5
       scan_interval: 300
       scale: 0.1
       precision: 1
@@ -210,7 +191,6 @@
       # count: 2
       input_type: input
       data_type: uint32
-      lazy_error_count: 5
       scan_interval: 3600
       scale: 1
       precision: 1
@@ -223,7 +203,6 @@
       # count: 2
       input_type: input
       data_type: uint32
-      lazy_error_count: 5
       scan_interval: 3600
       scale: 1
       precision: 1
@@ -237,7 +216,6 @@
       address: 33147
       input_type: input
       data_type: uint16
-      lazy_error_count: 5
       scan_interval: 60
       scale: 1
       precision: 1
@@ -249,7 +227,6 @@
       address: 33148
       input_type: input
       data_type: uint16
-      lazy_error_count: 5
       scan_interval: 60
       scale: 1
       precision: 1
@@ -263,7 +240,6 @@
       address: 33179
       input_type: input
       data_type: uint16
-      lazy_error_count: 5
       scan_interval: 300
       scale: 0.1
       precision: 1
@@ -276,7 +252,6 @@
       # count: 2
       input_type: input
       data_type: uint32
-      lazy_error_count: 5
       scan_interval: 3600
       scale: 1
       precision: 1
@@ -291,7 +266,6 @@
       # count: 2
       input_type: input
       data_type: int32
-      lazy_error_count: 5
       scan_interval: 60
       scale: 1
       precision: 1
@@ -303,7 +277,6 @@
       address: 33139
       input_type: input
       data_type: uint16
-      lazy_error_count: 5
       scan_interval: 60
       scale: 1
       precision: 1
@@ -315,7 +288,6 @@
       address: 33140
       input_type: input
       data_type: uint16
-      lazy_error_count: 5
       scan_interval: 60
       scale: 1
       precision: 1
@@ -327,7 +299,6 @@
       address: 33133
       input_type: input
       data_type: uint16
-      lazy_error_count: 5
       scan_interval: 60
       scale: 0.1
       precision: 1
@@ -339,7 +310,6 @@
       address: 33141
       input_type: input
       data_type: uint16
-      lazy_error_count: 5
       scan_interval: 60
       scale: 0.01
       precision: 1
@@ -351,7 +321,6 @@
       address: 33134
       input_type: input
       data_type: int16
-      lazy_error_count: 5
       scan_interval: 60
       scale: 0.1
       precision: 1
@@ -363,7 +332,6 @@
       address: 33142
       input_type: input
       data_type: int16
-      lazy_error_count: 5
       scan_interval: 60
       scale: 0.01
       precision: 1
@@ -375,7 +343,6 @@
       address: 33143
       input_type: input
       data_type: uint16
-      lazy_error_count: 5
       scan_interval: 60
       scale: 0.1
       precision: 1
@@ -387,7 +354,6 @@
       address: 33144
       input_type: input
       data_type: uint16
-      lazy_error_count: 5
       scan_interval: 60
       scale: 0.1
       precision: 1
@@ -399,7 +365,6 @@
       address: 33206
       input_type: input
       data_type: uint16
-      lazy_error_count: 5
       scan_interval: 60
       scale: 0.1
       precision: 1
@@ -411,7 +376,6 @@
       address: 33207
       input_type: input
       data_type: uint16
-      lazy_error_count: 5
       scan_interval: 60
       scale: 0.1
       precision: 1
@@ -425,7 +389,6 @@
       address: 33163
       input_type: input
       data_type: uint16
-      lazy_error_count: 5
       scan_interval: 300
       scale: 0.1
       precision: 1
@@ -437,7 +400,6 @@
       address: 33167
       input_type: input
       data_type: uint16
-      lazy_error_count: 5
       scan_interval: 300
       scale: 0.1
       precision: 1
@@ -450,7 +412,6 @@
       # count: 2
       input_type: input
       data_type: uint32
-      lazy_error_count: 5
       scan_interval: 3600
       scale: 1
       precision: 1
@@ -463,7 +424,6 @@
       # count: 2
       input_type: input
       data_type: uint32
-      lazy_error_count: 5
       scan_interval: 3600
       scale: 1
       precision: 1
@@ -477,7 +437,6 @@
       address: 33049
       input_type: input
       data_type: uint16
-      lazy_error_count: 5
       scan_interval: 60
       scale: 0.1
       precision: 1
@@ -489,7 +448,6 @@
       address: 33051
       input_type: input
       data_type: uint16
-      lazy_error_count: 5
       scan_interval: 60
       scale: 0.1
       precision: 1
@@ -501,7 +459,6 @@
       address: 33050
       input_type: input
       data_type: uint16
-      lazy_error_count: 5
       scan_interval: 60
       scale: 0.1
       precision: 1
@@ -513,7 +470,6 @@
       address: 33052
       input_type: input
       data_type: uint16
-      lazy_error_count: 5
       scan_interval: 60
       scale: 0.1
       precision: 1
@@ -526,7 +482,6 @@
       # count: 2
       input_type: input
       data_type: uint32
-      lazy_error_count: 5
       scan_interval: 60
       scale: 1
       precision: 1
@@ -541,7 +496,6 @@
       # count: 2
       input_type: input
       data_type: int32
-      lazy_error_count: 5
       scan_interval: 60
       scale: 1
       precision: 1
@@ -553,7 +507,6 @@
       address: 33073
       input_type: input
       data_type: uint16
-      lazy_error_count: 5
       scan_interval: 60
       scale: 0.1
       precision: 1
@@ -565,7 +518,6 @@
       address: 33076
       input_type: input
       data_type: uint16
-      lazy_error_count: 5
       scan_interval: 60
       scale: 0.1
       precision: 1
@@ -578,7 +530,6 @@
       # count: 2
       input_type: input
       data_type: int32
-      lazy_error_count: 5
       scan_interval: 60
       scale: 1
       precision: 1
@@ -590,7 +541,6 @@
       address: 33094
       input_type: input
       data_type: uint16
-      lazy_error_count: 5
       scan_interval: 60
       scale: .01
       precision: 1
@@ -604,7 +554,6 @@
       address: 33035
       input_type: input
       data_type: uint16
-      lazy_error_count: 5
       scan_interval: 300
       scale: .1
       precision: 1
@@ -617,7 +566,6 @@
       # count: 2
       input_type: input
       data_type: uint32
-      lazy_error_count: 5
       scan_interval: 3600
       scale: 1
       precision: 1
@@ -630,7 +578,6 @@
       # count: 2
       input_type: input
       data_type: uint32
-      lazy_error_count: 5
       scan_interval: 3600
       scale: 1
       precision: 1
@@ -643,7 +590,6 @@
       # count: 2
       input_type: input
       data_type: uint32
-      lazy_error_count: 5
       scan_interval: 3600
       scale: 1
       precision: 1
@@ -657,7 +603,6 @@
       address: 33132
       input_type: input
       data_type: uint16
-      lazy_error_count: 5
       scan_interval: 60
       scale: 1
       precision: 1
@@ -667,7 +612,6 @@
       address: 33135
       input_type: input
       data_type: uint16
-      lazy_error_count: 5
       scan_interval: 60
       scale: 1
       precision: 1
@@ -677,7 +621,6 @@
       address: 33095
       input_type: input
       data_type: uint16
-      lazy_error_count: 5
       scan_interval: 60
       scale: 1
       precision: 1
@@ -691,7 +634,6 @@
       address: 43117
       input_type: holding
       data_type: uint16
-      lazy_error_count: 5
       scan_interval: 60
       scale: 0.1
       precision: 1
@@ -703,7 +645,6 @@
       address: 43118
       input_type: holding
       data_type: uint16
-      lazy_error_count: 5
       scan_interval: 60
       scale: 0.1
       precision: 1
@@ -717,7 +658,6 @@
       address: 43141
       input_type: holding
       data_type: uint16
-      lazy_error_count: 5
       scan_interval: 60
       scale: 0.1
       precision: 1
@@ -729,7 +669,6 @@
       address: 43142
       input_type: holding
       data_type: uint16
-      lazy_error_count: 5
       scan_interval: 60
       scale: 0.1
       precision: 1
@@ -741,7 +680,6 @@
       address: 43143
       input_type: holding
       data_type: uint16
-      lazy_error_count: 5
       scan_interval: 60
       scale: 1
       precision: 0
@@ -751,7 +689,6 @@
       address: 43144
       input_type: holding
       data_type: uint16
-      lazy_error_count: 5
       scan_interval: 60
       scale: 1
       precision: 0
@@ -761,7 +698,6 @@
       address: 43145
       input_type: holding
       data_type: uint16
-      lazy_error_count: 5
       scan_interval: 60
       scale: 1
       precision: 0
@@ -771,7 +707,6 @@
       address: 43146
       input_type: holding
       data_type: uint16
-      lazy_error_count: 5
       scan_interval: 60
       scale: 1
       precision: 0
@@ -781,7 +716,6 @@
       address: 43147
       input_type: holding
       data_type: uint16
-      lazy_error_count: 5
       scan_interval: 60
       scale: 1
       precision: 0
@@ -791,7 +725,6 @@
       address: 43148
       input_type: holding
       data_type: uint16
-      lazy_error_count: 5
       scan_interval: 60
       scale: 1
       precision: 0
@@ -801,7 +734,6 @@
       address: 43149
       input_type: holding
       data_type: uint16
-      lazy_error_count: 5
       scan_interval: 60
       scale: 1
       precision: 0
@@ -811,7 +743,6 @@
       address: 43150
       input_type: holding
       data_type: uint16
-      lazy_error_count: 5
       scan_interval: 60
       scale: 1
       precision: 0
@@ -823,7 +754,6 @@
       address: 43153
       input_type: holding
       data_type: uint16
-      lazy_error_count: 5
       scan_interval: 60
       scale: 1
       precision: 0
@@ -833,7 +763,6 @@
       address: 43154
       input_type: holding
       data_type: uint16
-      lazy_error_count: 5
       scan_interval: 60
       scale: 1
       precision: 0
@@ -843,7 +772,6 @@
       address: 43155
       input_type: holding
       data_type: uint16
-      lazy_error_count: 5
       scan_interval: 60
       scale: 1
       precision: 0
@@ -853,7 +781,6 @@
       address: 43156
       input_type: holding
       data_type: uint16
-      lazy_error_count: 5
       scan_interval: 60
       scale: 1
       precision: 0
@@ -863,7 +790,6 @@
       address: 43157
       input_type: holding
       data_type: uint16
-      lazy_error_count: 5
       scan_interval: 60
       scale: 1
       precision: 0
@@ -873,7 +799,6 @@
       address: 43158
       input_type: holding
       data_type: uint16
-      lazy_error_count: 5
       scan_interval: 60
       scale: 1
       precision: 0
@@ -883,7 +808,6 @@
       address: 43159
       input_type: holding
       data_type: uint16
-      lazy_error_count: 5
       scan_interval: 60
       scale: 1
       precision: 0
@@ -893,7 +817,6 @@
       address: 43160
       input_type: holding
       data_type: uint16
-      lazy_error_count: 5
       scan_interval: 60
       scale: 1
       precision: 0
@@ -905,7 +828,6 @@
       address: 43163
       input_type: holding
       data_type: uint16
-      lazy_error_count: 5
       scan_interval: 60
       scale: 1
       precision: 0
@@ -915,7 +837,6 @@
       address: 43164
       input_type: holding
       data_type: uint16
-      lazy_error_count: 5
       scan_interval: 60
       scale: 1
       precision: 0
@@ -925,7 +846,6 @@
       address: 43165
       input_type: holding
       data_type: uint16
-      lazy_error_count: 5
       scan_interval: 60
       scale: 1
       precision: 0
@@ -935,7 +855,6 @@
       address: 43166
       input_type: holding
       data_type: uint16
-      lazy_error_count: 5
       scan_interval: 60
       scale: 1
       precision: 0
@@ -945,7 +864,6 @@
       address: 43167
       input_type: holding
       data_type: uint16
-      lazy_error_count: 5
       scan_interval: 60
       scale: 1
       precision: 0
@@ -955,7 +873,6 @@
       address: 43168
       input_type: holding
       data_type: uint16
-      lazy_error_count: 5
       scan_interval: 60
       scale: 1
       precision: 0
@@ -965,7 +882,6 @@
       address: 43169
       input_type: holding
       data_type: uint16
-      lazy_error_count: 5
       scan_interval: 60
       scale: 1
       precision: 0
@@ -975,7 +891,6 @@
       address: 43170
       input_type: holding
       data_type: uint16
-      lazy_error_count: 5
       scan_interval: 60
       scale: 1
       precision: 0
@@ -985,7 +900,6 @@
       address: 43024
       input_type: holding
       data_type: uint16
-      lazy_error_count: 5
       scan_interval: 60
       scale: 1
       precision: 0
@@ -997,7 +911,6 @@
       address: 43011
       input_type: holding
       data_type: uint16
-      lazy_error_count: 5
       scan_interval: 60
       scale: 1
       precision: 0
