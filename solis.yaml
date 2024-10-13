@@ -3,7 +3,10 @@
   host: !secret solis_ip
   port: 502   # for S2-WL-ST sticks
   # port: 8899  # for DLS-L sticks
-
+  delay: 5
+  message_wait_milliseconds: 100
+  timeout: 5
+  
   sensors:
     - name: Solis Year RO
       slave: 1
