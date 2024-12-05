@@ -1,4 +1,8 @@
+
 # ha_solis_modbus
+
+<H2> Support for HMI Firmware FB00 and Above</H2>
+Inverter HMI firmware version FB00 and above supports siz independent charge and discharge slots each with separate current setting and target SOC's. Different ModBus registers are used. If you have this formware use files `solis_fb00.yaml` and `scripts_fb00.yaml`
 
 <H2>Home Assistant YAML for Solis Hybrid Inverter using MODBUS</H2>
 

@@ -105,12 +105,15 @@ for device in devices:
     client.close()
 
 # %%
+device = 'Waveshare'
 client = ModbusTcpClient(host=CFG[device]["IP"], port=CFG[device]["PORT"])
 print(client.connect())
 # %%
-result = client.read_input_registers(33022, count=6, slave=sensor["slave"])
+result = client.read_input_registers(33022, count=6, slave=1)
 print(result.registers)
 client = ModbusTcpClient(host=CFG[device]["IP"], port=CFG[device]["PORT"])
-result = client.read_holding_registers(43000, count=6, slave=sensor["slave"])
+result = client.read_holding_registers(43000, count=6, slave=1)
 print(result.registers)
+# %%
+result = client.read_holding_registers(43151, count=40, slave=1)
 # %%
